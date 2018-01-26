@@ -26,6 +26,8 @@
     "express": "^4.16.2",
     "google-protobuf": "^3.5.0",
     "gtfs-realtime-bindings": "0.0.4",
+    "mongodb": "^3.0.1",
+    "mongoose": "^5.0.1",
     "protobufjs": "^6.8.4",
     "protocol-buffers": "^4.0.2",
     "request": "^2.83.0"

@@ -56,8 +56,49 @@
 // 		});
 // 	});
 
+
+
 var GtfsRealtimeBindings = require('gtfs-realtime-bindings');
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 var request = require('request');
+var updates = [];
+var positions = [];
+var mongo = require('mongodb').MongoClient;
+var dburl = ('mongodb://localhost:27017/RTDData');
+
+// mongoose.connect("mongodb://localhost/RTDData");
+
+// let UpdateSchema = new Schema({
+// 	trip: {
+// 	    trip_id: String,
+// 	    schedule_relationship: Number,
+// 	    route_id: String,
+// 	    direction_id: Number
+// 	},
+// 	stop_time_update: [{
+// 	    stop_sequence: String,
+// 	    arrival: {
+// 	        time: {
+// 	        	low: Number,
+// 	        	high: Number
+// 	        }
+// 	    },
+// 	    departure: {
+// 	        time: Number
+// 	    },
+// 	    stop_id: String,
+// 	    schedule_relationship: String
+// 	}],
+// 	vehicle: {
+// 	    id: String,
+// 	    label: String
+// 	},
+// 	timestamp: String
+// });
+
+
+// let Update = mongoose.model('update', UpdateSchema);
 
 var requestSettings = {
   method: 'GET',
@@ -74,8 +115,48 @@ request(requestSettings, function (error, response, body) {
     var feed = GtfsRealtimeBindings.FeedMessage.decode(body);
     feed.entity.forEach(function(entity) {
       if (entity.trip_update) {
-        console.log(entity.trip_update);
-      }
+      	updates.push(entity.trip_update);
+      	}
     });
   }
+  mongo.connect(dburl, function(err, db){
+  	db.db('RTDData').collection('update').remove({});
+  	if(err) console.log('there has been an error');
+  	updates.forEach((update)=>{
+  		db.db('RTDData').collection('update').insert(update, (err,res)=>{
+  			if(err) console.log('THERE HAS BEEN AN ERROR');
+  		});
+  	});
+  });
+});
+
+
+var requestSettingsVP = {
+  method: 'GET',
+  url: 'http://www.rtd-denver.com/google_sync/VehiclePosition.pb',
+  auth:{
+	user: 'RTDgtfsRT',
+	pass: 'realT!m3Feed',
+	sendImmediately: false
+	},
+  encoding: null
+};
+request(requestSettingsVP, function (error, response, body) {
+  if (!error && response.statusCode == 200) {
+    var feed = GtfsRealtimeBindings.FeedMessage.decode(body);
+    feed.entity.forEach(function(entity) {
+      if (entity.id) {
+      	positions.push(entity);
+      	}
+    });
+  }
+  mongo.connect(dburl, function(err, db){
+  	db.db('RTDData').collection('position').remove({});
+  	if(err) console.log('there has been an error');
+  	positions.forEach((position)=>{
+  		db.db('RTDData').collection('position').insert(position, (err,res)=>{
+  			if(err) console.log('THERE HAS BEEN AN ERROR');
+  		});
+  	});
+  });
 });
