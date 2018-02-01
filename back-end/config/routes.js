@@ -17,7 +17,7 @@ let updateTrips = ()=>{
 	isActive = true;
 // make API route call and parse data
 	mainController.updateData();
-	
+
 	let rightNow = Date.now();
 	//if nobody's been here in 15 minutes, turn it off!
 	if((rightNow-lastUsed)>900000){
@@ -36,7 +36,7 @@ let keepActive = (req, res, next)=>{
 };
 
 router.get('/', (req,res)=>{
-	res.send("POTATO Server is working!");
+	res.json("POTATO Server is working!");
 });
 
 router.route('/api')
