@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the BusNumberPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { EtaPage } from '../eta/eta';
 
 @IonicPage()
 @Component({
@@ -15,7 +10,13 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class BusNumberPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams) {
+  }
+
+  getETA(){
+    this.navCtrl.push(EtaPage);
   }
 
   ionViewDidLoad() {

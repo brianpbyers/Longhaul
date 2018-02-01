@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { UserPage } from '../user/user';
+
 
 @IonicPage()
 @Component({
@@ -16,6 +12,15 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class LoginPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+  }
+
+  userPage(){
+    this.navCtrl.push(UserPage);
+  }
+
+  signUp(){
+    alert('You have created an account, ya filthy animal')
+    this.navCtrl.push(UserPage)
   }
 
   ionViewDidLoad() {

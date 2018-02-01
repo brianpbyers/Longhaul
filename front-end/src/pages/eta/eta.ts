@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the EtaPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { LoginPage } from '../login/login';
+import { UserPage } from '../user/user';
 
 @IonicPage()
 @Component({
@@ -16,6 +12,14 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class EtaPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+  }
+
+  saveRoute(){
+    this.navCtrl.push(UserPage)
+  }
+
+  logIn(){
+    this.navCtrl.push(LoginPage)
   }
 
   ionViewDidLoad() {

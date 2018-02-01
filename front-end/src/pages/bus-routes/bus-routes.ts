@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { BusStopsPage } from '../bus-stops/bus-stops';
+
 /**
  * Generated class for the BusRoutesPage page.
  *
@@ -16,6 +18,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class BusRoutesPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+  }
+
+  selectStop(){
+    this.navCtrl.push(BusStopsPage)
   }
 
   ionViewDidLoad() {
