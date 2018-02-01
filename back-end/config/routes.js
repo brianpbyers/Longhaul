@@ -17,7 +17,7 @@ let updateTrips = ()=>{
 	isActive = true;
 // make API route call and parse data
 	mainController.updateData();
-	
+
 	let rightNow = Date.now();
 	//if nobody's been here in 15 minutes, turn it off!
 	if((rightNow-lastUsed)>900000){
