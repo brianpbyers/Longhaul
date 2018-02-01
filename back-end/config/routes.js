@@ -2,10 +2,9 @@ const router = require('express').Router();
 
 const passport = require('passport');
 
-const request = require('request');
+let mainController = require('../controllers/mainController.js');
 
-const rtdUser = process.env.rtdUser || require('./env.js').rtdUser;
-const rtdPassword = process.env.rtdPassword || require('./env.js').rtdPassword;
+
 
 let lastUsed = Date.now();
 let isActive = false;
@@ -17,6 +16,8 @@ let updateTrips = ()=>{
 	//will let functions know the updater is running and not to run it again
 	isActive = true;
 // make API route call and parse data
+	mainController.updateData();
+	
 	let rightNow = Date.now();
 	//if nobody's been here in 15 minutes, turn it off!
 	if((rightNow-lastUsed)>900000){
@@ -35,8 +36,11 @@ let keepActive = (req, res, next)=>{
 };
 
 router.get('/', (req,res)=>{
-	res.send("Server is working!");
+	res.send("POTATO Server is working!");
 });
+
+router.route('/api')
+	.get(mainController.getApi);
 
 
 
