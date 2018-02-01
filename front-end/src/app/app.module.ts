@@ -8,11 +8,23 @@ import { HttpClientModule } from '@angular/common/http'
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { BusNumberPage } from '../pages/bus-number/bus-number';
+import { BusRoutesPage } from '../pages/bus-routes/bus-routes';
+import { BusStopsPage } from '../pages/bus-stops/bus-stops';
+import { EtaPage } from '../pages/eta/eta';
+import { LoginPage } from '../pages/login/login';
+import { SignupPage } from '../pages/signup/signup';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    BusNumberPage,
+    BusRoutesPage,
+    BusStopsPage,
+    EtaPage,
+    LoginPage,
+    SignupPage
   ],
   imports: [
     BrowserModule,
@@ -22,7 +34,13 @@ import { HomePage } from '../pages/home/home';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    BusNumberPage,
+    BusRoutesPage,
+    BusStopsPage,
+    EtaPage,
+    LoginPage,
+    SignupPage
   ],
   providers: [
     StatusBar,
