@@ -36,7 +36,7 @@ let keepActive = (req, res, next)=>{
 };
 
 router.get('/', (req,res)=>{
-	res.send("POTATO Server is working!");
+	res.json("POTATO Server is working!");
 });
 
 router.route('/api')
