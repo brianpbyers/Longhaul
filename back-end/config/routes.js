@@ -42,6 +42,11 @@ router.get('/', (req,res)=>{
 router.route('/api')
 	.get(mainController.getApi);
 
+router.route('/api/routes')
+	.get(mainController.getRoutes);
+
+router.route('/api/stops')
+	.get(mainController.getStops);
 
 
 
