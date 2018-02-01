@@ -7,56 +7,17 @@
 
 // better feed maybe:
 // http://transitfeeds.com/api/
+// let lastActive = Date.now();
 
-//could try 'http://RTDgtfsRT:realT!m3Feed@www.rtd-denver.com/google_sync/VehiclePosition.pb'
+// updateTest = setInterval(()=>{
+//   let rightNow = Date.now();
+//   console.log("Time:",rightNow);
+//   if((rightNow-lastActive)>6000){
+//     console.log("All Done!");
+//     clearInterval(updateTest);
+//   }
 
-// var options = {
-// 	URL: "http://www.rtd-denver.com/google_sync/VehiclePosition.pb",
-// 	{
-// 			auth:{
-// 					user: 'RTDgtfsRT',
-// 					pass: 'realT!m3Feed',
-// 					sendImmediately: false
-// 				}
-// 	}
-// }
-// var options = {
-// 	URL: "http://www.rtd-denver.com/google_sync/VehiclePosition.pb", 
-// 	headers: {
-// 		"Authorization": "Basic" + new Buffer('RTDgtfsRT' + ':' + 'realT!m3Feed').toString("base64")
-// 	}
-// }
-
-// request.get("http://www.rtd-denver.com/google_sync/TripUpdate.pb",{
-// 	auth:{
-// 		user: 'RTDgtfsRT',
-// 		pass: 'realT!m3Feed',
-// 		sendImmediately: false
-// 	}
-// }, (err, response, body)=>{
-// 		console.log(typeof(body));
-// 		var feed = gtfs.FeedMessage.decode(body);
-// 		console.log('hello');
-// //     });
-
-// http.get("http://www.rtd-denver.com/google_sync/TripUpdate.pb",{
-// 	auth:{
-// 		user: 'RTDgtfsRT',
-// 		pass: 'realT!m3Feed',
-// 		sendImmediately: false
-// 	}}, (res)=>{
-// 		console.log('res?',res);
-// 		var data = [];
-// 		res.on("data", (chunk)=>{
-// 			data.push(chunk);
-// 		});
-// 		res.on("end", ()=>{
-// 			data = Buffer.concat(data);
-// 			console.log("job's done.",data);
-// 		});
-// 	});
-
-
+// }, 1000);
 
 var GtfsRealtimeBindings = require('gtfs-realtime-bindings');
 var mongoose = require('mongoose');
@@ -67,38 +28,10 @@ var positions = [];
 var mongo = require('mongodb').MongoClient;
 var dburl = ('mongodb://localhost:27017/RTDData');
 
-// mongoose.connect("mongodb://localhost/RTDData");
-
-// let UpdateSchema = new Schema({
-// 	trip: {
-// 	    trip_id: String,
-// 	    schedule_relationship: Number,
-// 	    route_id: String,
-// 	    direction_id: Number
-// 	},
-// 	stop_time_update: [{
-// 	    stop_sequence: String,
-// 	    arrival: {
-// 	        time: {
-// 	        	low: Number,
-// 	        	high: Number
-// 	        }
-// 	    },
-// 	    departure: {
-// 	        time: Number
-// 	    },
-// 	    stop_id: String,
-// 	    schedule_relationship: String
-// 	}],
-// 	vehicle: {
-// 	    id: String,
-// 	    label: String
-// 	},
-// 	timestamp: String
-// });
 
 
-// let Update = mongoose.model('update', UpdateSchema);
+
+
 
 var requestSettings = {
   method: 'GET',
