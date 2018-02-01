@@ -1,5 +1,6 @@
 const request = require('request');
 const GTFS = require('gtfs-realtime-bindings');
+const DB = require('../models').models;
 
 //getting keys for the requests
 const rtdUser = process.env.rtdUser || require('../config/env.js').rtdUser;
@@ -9,7 +10,16 @@ let getApi = (req, res)=>{
 	res.send('You got to the Get API request!');
 };
 
+let getRoutes = (req, res)=>{
+	DB.Route.findAll()
+		.then((routes)=>{
+			res.json(routes);
+		});
+};
 
+let getStops = (req, res)=>{
+	res.json([{id_num: 1, name:"one"},{id_num: 2, name:"two"},{id_num: 3, name:"did you see this Mark?"},{id_num: 4, name:"POTATO"},{id_num: 5, name:"alive"}]);
+};
 
 //updates real-time trip data provided by RTD
 let updateData = ()=>{
@@ -18,4 +28,6 @@ let updateData = ()=>{
 
 
 module.exports.getApi = getApi;
+module.exports.getRoutes = getRoutes;
+module.exports.getStops = getStops;
 module.exports.updateData = updateData;
