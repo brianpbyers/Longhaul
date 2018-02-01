@@ -5,14 +5,12 @@ import { BusNumberPage } from '../bus-number/bus-number';
 
 @IonicPage()
 @Component({
-  selector: 'page-bus-stops',
-  templateUrl: 'bus-stops.html',
+  selector: 'page-user',
+  templateUrl: 'user.html',
 })
-export class BusStopsPage {
+export class UserPage {
 
-  constructor(
-    public navCtrl: NavController, 
-    public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   selectBus(){
@@ -20,7 +18,7 @@ export class BusStopsPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad BusStopsPage');
+    console.log('ionViewDidLoad UserPage');
   }
 
 }

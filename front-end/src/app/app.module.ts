@@ -14,6 +14,7 @@ import { BusStopsPage } from '../pages/bus-stops/bus-stops';
 import { EtaPage } from '../pages/eta/eta';
 import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
+import { UserPage } from '../pages/user/user';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { SignupPage } from '../pages/signup/signup';
     BusStopsPage,
     EtaPage,
     LoginPage,
-    SignupPage
+    SignupPage,
+    UserPage
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,8 @@ import { SignupPage } from '../pages/signup/signup';
     BusStopsPage,
     EtaPage,
     LoginPage,
-    SignupPage
+    SignupPage,
+    UserPage
   ],
   providers: [
     StatusBar,
