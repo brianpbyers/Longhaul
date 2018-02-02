@@ -20,19 +20,25 @@ export class BusStopsPage implements OnInit {
     private busService: BusServiceProvider
   ) {}
 
-  selectedRoute = this.navParams.get('id');
-  
-
   ngOnInit(){
-      this.busService.getStops().subscribe((response) => {
-      this.stops = response
-      console.log('stops ', this.stops);
-     })
+    //   this.busService.getStops(stop).subscribe((response) => {
+    //   this.stops = response
+    //   console.log('stops ', this.stops);
+    //  })
   }
 
-  getStops(){
-  
+  ionViewWillLoad(){
+    const selectedRoute = this.navParams.get('name');
+    console.log(selectedRoute);
+    this.busService.getStops(selectedRoute).subscribe((response) => {
+      this.stops = response;
+      console.log('stops: ', this.stops)
+    }); 
   }
+
+  // getStops(){
+  
+  // }
 
   goToBusPage(){
     this.navCtrl.push(BusNumberPage)

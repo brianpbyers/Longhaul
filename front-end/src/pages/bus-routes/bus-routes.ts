@@ -5,7 +5,7 @@ import { BusServiceProvider } from '../../providers/bus-service/bus-service';
 
 import { BusStopsPage } from '../bus-stops/bus-stops';
 
-// @IonicPage()
+@IonicPage()
 @Component({
   selector: 'page-bus-routes',
   templateUrl: 'bus-routes.html'
@@ -29,11 +29,15 @@ export class BusRoutesPage implements OnInit {
   ionViewWillLoad(){
     this.busService.getRoutes().subscribe((response) => {
       this.routes = response
-      console.log('routes: ', this.routes)
+      // console.log('routes: ', this.routes)
     }); 
   }
 
   goToStopsPage(route){
+    // console.log(route);
+    const selectedRoute = route;
+    // console.log(selectedRoute);
+    this.busService.getStops(selectedRoute)
     this.navCtrl.push(BusStopsPage)
   }
 
