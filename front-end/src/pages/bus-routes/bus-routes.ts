@@ -27,11 +27,8 @@ export class BusRoutesPage implements OnInit {
     }); 
   }
 
-  selectStop(){
+  goToStopsPage(){
     this.navCtrl.push(BusStopsPage)
-  }
-
-  ionViewDidLoad() {
   }
 
 }
