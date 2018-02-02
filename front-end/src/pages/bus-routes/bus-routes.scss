@@ -3,6 +3,7 @@ page-bus-routes {
 }
 
 .scroller{
+<<<<<<< HEAD
     height: 20px;
     width: 100%;
     margin-top: 20px;
@@ -11,4 +12,16 @@ page-bus-routes {
 }
 .routes-padding{
     height: 1px;
+=======
+    height: 300px;
+    width: 100vw;
+    margin: 0 auto;
+    margin-left: -60px;
+    position: absolute;
+    text-align: left;
+
+}
+.routes-padding{
+    height: 200px;
+>>>>>>> 500f9249d2e05706796648ff76f644d829d4dafa
 }
