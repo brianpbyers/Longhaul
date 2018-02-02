@@ -1,18 +1,22 @@
-var Sequelize = require('sequelize');
+let Sequelize = require('sequelize');
 
-var compName = process.env.compName||require('../config/env.js').compName;
+let compName = process.env.compName||require('../config/env.js').compName;
 
-var sequelize = new Sequelize(`postgres://${compName}@localhost:5432/longhaul`);
+let sequelize = new Sequelize(`postgres://${compName}@localhost:5432/longhaul`);
 
 module.exports.sequelize = sequelize;
 module.exports.Sequelize = Sequelize;
 
-var Bus = sequelize.import('./bus');
-var Route = sequelize.import('./route');
-var Stop = sequelize.import('./stop');
+let Bus = sequelize.import('./bus');
+let Route = sequelize.import('./route');
+let Stop = sequelize.import('./stop');
+let Trip = sequelize.import('./trip');
+let Update = sequelize.import('./update');
 
 module.exports.models = {
-	Bus: Bus,
+	Update: Update,
 	Route: Route,
-	Stop: Stop
+	Stop: Stop,
+	Trip: Trip,
+	Bus: Bus
 };
