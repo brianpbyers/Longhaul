@@ -11,9 +11,10 @@ let Bus = sequelize.import('./bus');
 let Route = sequelize.import('./route');
 let Stop = sequelize.import('./stop');
 let Trip = sequelize.import('./trip');
+let Update = sequelize.import('./update');
 
 module.exports.models = {
-	Bus: Bus,
+	Update: Update,
 	Route: Route,
 	Stop: Stop,
 	Trip: Trip
