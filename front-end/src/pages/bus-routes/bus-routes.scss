@@ -2,12 +2,13 @@ page-bus-routes {
 
 }
 
-#scroller{
-    height: 300px;
+.scroller{
+    height: 20px;
     width: 100%;
     margin-top: 20px;
-
+    top: 50px;
+    background: red;
 }
-#routes-padding{
-    height: 200px;
+.routes-padding{
+    height: 1px;
 }

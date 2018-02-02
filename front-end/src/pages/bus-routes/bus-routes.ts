@@ -27,7 +27,7 @@ export class BusRoutesPage implements OnInit {
     }); 
   }
 
-  ionViewDidLoad(){
+  ionViewWillLoad(){
     this.busService.getRoutes().subscribe((response) => {
       this.routes = response
       console.log('routes: ', this.routes)

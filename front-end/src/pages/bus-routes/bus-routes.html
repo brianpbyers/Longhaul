@@ -9,7 +9,7 @@
 <ion-content padding>
   
   <div class="scroller">
-    <ion-list no-lines [virtualScroll]="routes">
+    <ion-list no-lines [virtualScroll]="routes" [approxItemHeight]="'40px'">
           <ion-item *virtualItem="let route" (click)="selectStop()"> 
             <div item-left [style.background-color]=route.color style="width: 60px; height:60px; border-radius:50%"></div>
               
