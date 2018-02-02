@@ -10,5 +10,11 @@
 <ion-content padding>
 
   <button ion-button (click)="selectStop()" >Select Your Stop</button>
+  <ion-list [virtualScroll]="items">
+    <ion-item *virtualItem="let item">
+      {{item}}
+    </ion-item>
+
+  </ion-list>
 
 </ion-content>
