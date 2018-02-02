@@ -17,5 +17,9 @@ export class BusServiceProvider {
     return this.http.get('http://localhost:3000/api/routes')
   }
 
+  getStops(){
+    return this.http.get('http://localhost:3000/api/stops')
+  }
+
 
 }
