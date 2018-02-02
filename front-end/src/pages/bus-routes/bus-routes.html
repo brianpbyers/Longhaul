@@ -9,13 +9,14 @@
 
 <ion-content padding>
   <div class="scroller">
-      <button ion-button (click)="selectStop()" >Select Your Stop</button>
+      
     <ion-list no-lines [virtualScroll]="route">
       <ion-item *virtualItem="let route" (click)="selectStop()"> 
         <div item-left [style.background-color]=route.color style="width: 60px; height:60px; border-radius:50%"></div>
+        <div item-right 
           <h4>{{route.name}}</h4>
       </ion-item>
+    </ion-content>
+    
+  <button ion-button (click)="goToStopsPage()" >Select Your Stop</button>
 
-    </ion-list>
-  </div> 
-</ion-content>

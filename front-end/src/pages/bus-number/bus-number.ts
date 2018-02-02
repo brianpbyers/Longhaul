@@ -15,7 +15,7 @@ export class BusNumberPage {
     public navParams: NavParams) {
   }
 
-  getETA(){
+  goToRouteDataPage(){
     this.navCtrl.push(EtaPage);
   }
 
