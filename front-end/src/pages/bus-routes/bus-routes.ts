@@ -1,27 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { BusStopsPage } from '../bus-stops/bus-stops';
+import { BusServiceProvider } from '../../providers/bus-service/bus-service';
 
-/**
- * Generated class for the BusRoutesPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { BusStopsPage } from '../bus-stops/bus-stops';
 
 @IonicPage()
 @Component({
   selector: 'page-bus-routes',
   templateUrl: 'bus-routes.html',
 })
-export class BusRoutesPage {
-  public items = []
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    for(let i=0; i<100; i++){
-      this.items.push(`Route ${i}`);
-      console.log(this.items)
-    }
+export class BusRoutesPage implements OnInit {
+
+  routes: any;
+
+  constructor(
+    private navCtrl: NavController, 
+    private navParams: NavParams,
+    private busService: BusServiceProvider
+  ) {}
+
+  ngOnInit(){
+    this.busService.getRoutes().subscribe((response) => {
+      this.routes = response
+      console.log('routes: ', this.routes)
+    }); 
   }
 
   selectStop(){
@@ -29,7 +32,6 @@ export class BusRoutesPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad BusRoutesPage');
   }
 
 }
