@@ -17,5 +17,6 @@ module.exports.models = {
 	Update: Update,
 	Route: Route,
 	Stop: Stop,
-	Trip: Trip
+	Trip: Trip,
+	Bus: Bus
 };
