@@ -4,8 +4,11 @@ page-bus-routes {
 
 .scroller{
     height: 300px;
-    width: 300px;
-    margin-top: 20px;
+    width: 100vw;
+    margin: 0 auto;
+    margin-left: -60px;
+    position: absolute;
+    text-align: left;
 
 }
 .routes-padding{
