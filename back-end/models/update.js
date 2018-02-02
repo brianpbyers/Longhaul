@@ -4,7 +4,7 @@ module.exports = function(sequelize, Sequelize){
     route: Sequelize.STRING,
     bus: Sequelize.STRING,
     stop: Sequelize.STRING,
-    eta: Sequelize.INTEGER
+    eta: Sequelize.BIGINT
   });
   return model;
 };
