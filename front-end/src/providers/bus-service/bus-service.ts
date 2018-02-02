@@ -5,8 +5,8 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class BusServiceProvider {
 
-  busRoutes: any;
-  busStops: string;
+  busRoute: any;
+  busStop: string;
   busNumber: string;
 
   constructor(

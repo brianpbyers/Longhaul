@@ -33,7 +33,7 @@ export class BusRoutesPage implements OnInit {
     }); 
   }
 
-  goToStopsPage(){
+  goToStopsPage(route){
     this.navCtrl.push(BusStopsPage)
   }
 

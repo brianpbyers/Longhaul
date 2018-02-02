@@ -7,21 +7,13 @@
 </ion-header>
 
 <ion-content padding>
-<<<<<<< HEAD
-  
-  <div class="scroller">
-    <ion-list no-lines [virtualScroll]="routes" [approxItemHeight]="'40px'">
-          <ion-item *virtualItem="let route" (click)="selectStop()"> 
-            <div item-left [style.background-color]=route.color style="width: 60px; height:60px; border-radius:50%"></div>
-=======
-  <div >
+  <div>
     
   </div>
  <div class="scroller">
     <ion-list [virtualScroll]="routes" [approxItemHeight]="'40px'">
-          <ion-item *virtualItem="let route" (click)="selectStop()" >
+          <ion-item *virtualItem="let route" (click)="goToStopsPage(route)" ion-icon="arrow-dropright" >
             <div item-left [style.background-color]="route.color" style="width: 60px; height:60px; border-radius:50%"></div>
->>>>>>> 500f9249d2e05706796648ff76f644d829d4dafa
               
              <h4>{{route.name}}  {{route.description}}</h4>
           </ion-item>
