@@ -20,18 +20,21 @@ export class BusStopsPage implements OnInit {
     private busService: BusServiceProvider
   ) {}
 
+  selectedRoute = this.navParams.get('id');
+  
+
   ngOnInit(){
       this.busService.getStops().subscribe((response) => {
       this.stops = response
       console.log('stops ', this.stops);
-    })
+     })
   }
 
   getStops(){
   
   }
 
-  selectBus(){
+  goToBusPage(){
     this.navCtrl.push(BusNumberPage)
   }
 
