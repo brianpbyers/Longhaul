@@ -16,10 +16,11 @@ import { BusStopsPage } from '../bus-stops/bus-stops';
   templateUrl: 'bus-routes.html',
 })
 export class BusRoutesPage {
-  public items = ['shoes', 'coffee', 'tigers', 'triscuits', 'onions', 'laptops', 'buses', ]
+  public items = []
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     for(let i=0; i<100; i++){
       this.items.push(`item ${i}`);
+      console.log(this.items)
     }
   }
 
