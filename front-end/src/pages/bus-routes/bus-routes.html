@@ -3,22 +3,27 @@
   <ion-navbar>
     <ion-title>Select Your Route</ion-title>
   </ion-navbar>
-
+  <div  *ngIf="routes">
+    routes loaded
+  </div>  
 </ion-header>
 
 
+
 <ion-content padding>
-  <div class="scroller">
-    <ion-list no-lines [virtualScroll]="routes" approxItemHeight="100px">
-      <ion-item *virtualItem="let route" (click)="selectStop()"> 
-        <!-- <div item-left [style.background-color]=route.color style="width: 60px; height:60px; border-radius:50%"></div> -->
-        
-          <h4>{{route.name}}</h4>
-      </ion-item>
-    </ion-list>
-  </div>
-  <button ion-button (click)="goToStopsPage()" >Select Your Stop</button>
-</ion-content>
-    
   
+  <div class="scroller" *ngIf="routes">
+    <ion-list no-lines [virtualScroll]="routes">
+          <ion-item *virtualItem="let route" (click)="selectStop()" approxItemHeight="50px"> 
+            <div item-left [style.background-color]=route.color style="width: 60px; height:60px; border-radius:50%"></div>
+              
+              <h4>{{route.name}}</h4>
+          </ion-item>
+        </ion-list>
+    </div>
+
+    <button ion-button (click)="goToStopsPage()">Select Your Stop</button>
+
+  </ion-content>
+    
 

@@ -5,10 +5,10 @@ import { BusServiceProvider } from '../../providers/bus-service/bus-service';
 
 import { BusStopsPage } from '../bus-stops/bus-stops';
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-bus-routes',
-  templateUrl: 'bus-routes.html',
+  templateUrl: 'bus-routes.html'
 })
 export class BusRoutesPage implements OnInit {
 
@@ -20,13 +20,13 @@ export class BusRoutesPage implements OnInit {
     private busService: BusServiceProvider
   ) {}
   ngOnInit(){
-    this.busService.getRoutes().subscribe((response) => {
-      this.routes = response
-      console.log('routes: ', this.routes)
-    }); 
+    // this.busService.getRoutes().subscribe((response) => {
+    //   this.routes = response
+    //   console.log('routes: ', this.routes)
+    // }); 
   }
 
-  ionViewWillLoad(){
+  ionViewDidLoad(){
     this.busService.getRoutes().subscribe((response) => {
       this.routes = response
       console.log('routes: ', this.routes)
