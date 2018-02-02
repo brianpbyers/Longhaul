@@ -19,7 +19,7 @@ export class BusRoutesPage {
   public items = []
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     for(let i=0; i<100; i++){
-      this.items.push(`item ${i}`);
+      this.items.push(`Route ${i}`);
       console.log(this.items)
     }
   }
