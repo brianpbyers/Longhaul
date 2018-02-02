@@ -11,11 +11,12 @@
     
   </div>
  <div class="scroller">
-    <ion-list [virtualScroll]="routes" [approxItemHeight]="'40px'">
-          <ion-item *virtualItem="let route" (click)="selectStop()" >
+    <ion-list [virtualScroll]="routes" [approxItemHeight]="'40px'" >
+          <ion-item *virtualItem="let route" (click)="goToStopsPage()"  >
             <div item-left [style.background-color]="route.color" style="width: 60px; height:60px; border-radius:50%"></div>
               
              <h4>{{route.name}}  {{route.description}}</h4>
+             <ion-icon name="arrow-dropright" align="right"></ion-icon>
           </ion-item>
         </ion-list>
     </div>

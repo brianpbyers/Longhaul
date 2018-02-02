@@ -29,10 +29,15 @@ export class BusStopsPage implements OnInit {
       console.log('stops ', this.stops);
      })
   }
-
-  getStops(){
-  
+  ionViewDidLoad(){
+    this.busService.getStops().subscribe((response) => {
+      this.stops = response
+      console.log('stops: ', this.stops)
+    }); 
   }
+  // getStops(){
+  
+  // }
 
   goToBusPage(){
     this.navCtrl.push(BusNumberPage)
