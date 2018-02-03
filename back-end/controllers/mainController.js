@@ -1,11 +1,13 @@
 const request = require('request');
 const GTFS = require('gtfs-realtime-bindings');
-const DB = require('../models').models;
+const DaBa = require('../models');
+const DB = DaBa.models;
 
 //getting keys for the requests
 const rtdUser = process.env.rtdUser || require('../config/env.js').rtdUser;
 const rtdPassword = process.env.rtdPassword || require('../config/env.js').rtdPassword;
 
+let oneUpdate = {};
 let updates = [];
 
 let getApi = (req, res)=>{
@@ -20,39 +22,77 @@ let getRoutes = (req, res)=>{
 };
 
 let getStops = (req, res)=>{
-	res.json([{id_num: 1, name:"one"},{id_num: 2, name:"two"},{id_num: 3, name:"did you see this Mark?"},{id_num: 4, name:"POTATO"},{id_num: 5, name:"alive"}]);
+	let userRoute = req.params.route;
+	let resObj = {buses:[], stops:[]};
+	DB.Bus.findAll({where:{route:userRoute}})
+	.then((buses)=>{
+		resObj.buses = buses;
+		console.log('found buses!',...buses);
+		DaBa.sequelize.query(`select * from (select distinct on (route, stop) route, stop from updates where route = '${userRoute}') potato JOIN stops ON potato.stop=stops.number;`)
+		 .then((stops)=>{
+		 	console.log('sorta found stops',...stops[0]);
+		 	resObj.stops = stops[0];
+		 	res.json(resObj);
+		});
+	});
+};
+
+let getUpdate = (req,res)=>{
+	updateData();
+	res.send("You got here!");
 };
 
 //updates real-time trip data provided by RTD
 let updateData = ()=>{
+	let StartTime = Date.now();
 	let requestSettings = {
 	  method: 'GET',
 	  url: 'http://www.rtd-denver.com/google_sync/TripUpdate.pb',
 	  auth:{
-		user: 'rtdUser',
-		pass: 'rtdPassword',
+		user: rtdUser,
+		pass: rtdPassword,
 		sendImmediately: false
 		},
 	  encoding: null
 	};
 	request(requestSettings, function (error, response, body) {
+		console.log('got to the request');
 	  if (!error && response.statusCode == 200) {
+	  	console.log('got some stuff I think');
 	    let feed = GTFS.FeedMessage.decode(body);
 	    feed.entity.forEach(function(entity) {
+	    //having trouble with MULTIPLE bus #'s not being included'
 	      if (entity.trip_update) {
-	      	updates.push(entity.trip_update);
+	      	oneUpdate = {trip: entity.trip_update.trip.trip_id||"FIXME", route: entity.trip_update.trip.route_id||"FIXME", bus:entity.trip_update.vehicle?entity.trip_update.vehicle.id:entity.trip_update.trip.route_id||"FIXME"};
+	      	console.log('OneUpdate:',oneUpdate);
+	      	entity.trip_update.stop_time_update.forEach((stop)=>{
+	      		oneUpdate.stop = stop.stop_id;
+	      		oneUpdate.eta = (stop.arrival? stop.arrival.time.low:stop.departure?stop.departure.time.low:0)*1000;
+	      		updates.push(Object.assign({},oneUpdate));
+	      	});
 	      	}
 	    });
 	  }
-	  mongo.connect(dburl, function(err, db){
-	  	db.db('RTDData').collection('update').remove({});
-	  	if(err) console.log('there has been an error');
-	  	updates.forEach((update)=>{
-	  		db.db('RTDData').collection('update').insert(update, (err,res)=>{
-	  			if(err) console.log('THERE HAS BEEN AN ERROR');
-	  		});
-	  	});
-	  });
+	  DB.Update.destroy({where:{}})
+	  .then(()=>{
+		  DB.Update.bulkCreate(updates,{validate:true})
+		  .then((updates)=>{
+		  	let TotalTime = (Date.now()-StartTime)/1000;
+		  	console.log('created updates!!!!! took: ',TotalTime,'Seconds');
+		  	DB.Update.findAll({attributes:[DaBa.sequelize.literal('DISTINCT ON("bus") "bus", "route"')], raw: true})
+		  	.then((buses)=>{
+		  		DB.Bus.destroy({where:{}})
+		  		.then(()=>{
+		  			DB.Bus.bulkCreate(buses)
+		  			.then((buses)=>{
+		  				let totalToBuses = (Date.now()-StartTime)/1000;
+		  				console.log("SHOULD HAVE CREATED BUSES!  Took:",totalToBuses,"seconds");
+		  			});
+		  		});
+		  	});
+
+		  });
+		});
 	});
 
 };
@@ -61,4 +101,5 @@ let updateData = ()=>{
 module.exports.getApi = getApi;
 module.exports.getRoutes = getRoutes;
 module.exports.getStops = getStops;
+module.exports.getUpdate = getUpdate;
 module.exports.updateData = updateData;
