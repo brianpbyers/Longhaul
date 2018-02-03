@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { BusServiceProvider } from '../../providers/bus-service/bus-service';
+
 import { LoginPage } from '../login/login';
 import { UserPage } from '../user/user';
 
@@ -11,7 +13,21 @@ import { UserPage } from '../user/user';
 })
 export class EtaPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  busRoute: any;
+  busStop: any;
+  bus: any;
+  ETA: any;
+
+  constructor(
+    private navCtrl: NavController, 
+    private navParams: NavParams,
+    private busService: BusServiceProvider
+  ) {}
+
+  ionViewDidLoad(){
+    this.busService.getUpdate().subscribe((res) => {
+      console.log(res);
+    })
   }
 
   saveRoute(){
@@ -20,10 +36,6 @@ export class EtaPage {
 
   logIn(){
     this.navCtrl.push(LoginPage)
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad EtaPage');
   }
 
 }

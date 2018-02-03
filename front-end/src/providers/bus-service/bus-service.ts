@@ -46,8 +46,10 @@ export class BusServiceProvider {
     console.log('selected bus', this.selectedBus);
   }
 
-  getUpdate(){
-    return 
+  getUpdate(): any{
+    const etaURL = `http://localhost:3000/api/update/${this.selectedRoute.name}/${this.selectedStop.number}/${this.selectedBus.bus}`;
+
+    return this.http.get(etaURL);
   }
 
 }
