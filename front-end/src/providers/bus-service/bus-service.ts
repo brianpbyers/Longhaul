@@ -29,7 +29,12 @@ export class BusServiceProvider {
 
     const stopsURL = `http://localhost:3000/api/stops/${this.selectedRoute.name}`;
 
-    this.busStop = this.http.get(stopsURL);
-    console.log('bus stops: ', this.busStop);
+    this.http.get(stopsURL)
+    .subscribe((res)=>{
+          console.log('bus stops: ', this.busStop);
+          this.busStop = res;
+          return this.busStop;
+    })
+
   }
 }
