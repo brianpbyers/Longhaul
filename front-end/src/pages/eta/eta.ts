@@ -26,7 +26,9 @@ export class EtaPage {
 
   ionViewDidLoad(){
     this.busService.getUpdate().subscribe((res) => {
-      console.log(res);
+      console.log(res.route);
+      console.log(res.stop);
+      console.log(res.bus);
     })
   }
 

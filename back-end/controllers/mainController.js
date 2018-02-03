@@ -52,7 +52,7 @@ let getUpdate = (req,res)=>{
 
 	DB.Update.findAll({where:{route: req.params.route, stop: req.params.stop, bus:req.params.bus}})
 	.then((update)=>{
-		res.json(update);
+		res.json(update[0]);
 	});
 };
 
