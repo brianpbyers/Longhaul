@@ -16,8 +16,11 @@ import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
 import { UserPage } from '../pages/user/user';
 
+
 import { BusServiceProvider } from '../providers/bus-service/bus-service';
 import { UserServiceProvider } from '../providers/user-service/user-service';
+import { TabsPage } from '../pages/tabs/tabs';
+import { FavoritesPage } from '../pages/favorites/favorites';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,9 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     EtaPage,
     LoginPage,
     SignupPage,
-    UserPage
+    UserPage,
+    TabsPage,
+    FavoritesPage
   ],
   imports: [
     BrowserModule,
@@ -47,7 +52,9 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     EtaPage,
     LoginPage,
     SignupPage,
-    UserPage
+    UserPage,
+    TabsPage,
+    FavoritesPage
   ],
   providers: [
     StatusBar,
