@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { BusServiceProvider } from '../../providers/bus-service/bus-service';
@@ -10,7 +10,7 @@ import { BusNumberPage } from '../bus-number/bus-number';
   selector: 'page-bus-stops',
   templateUrl: 'bus-stops.html',
 })
-export class BusStopsPage implements OnInit {
+export class BusStopsPage  {
 
   stops: any;
 
@@ -20,26 +20,16 @@ export class BusStopsPage implements OnInit {
     private busService: BusServiceProvider
   ) {}
 
-  ngOnInit(){
-    this.busService.busStop.subscribe();
-    console.log( 'here are your stops ', this.stops);
+  ionViewWillEnter(){
+    this.busService.getStops().subscribe((res) => {
+      this.stops = res.stops;
+      console.log( 'here', this.stops);
+    })
   }
 
-  ionViewDidLoad(){
-    // const selectedRoute = this.navParams.get('name');
-    // console.log('bus stops page: ', selectedRoute);
-    // this.busService.getStops(selectedRoute).subscribe((response) => {
-    //   this.stops = response;
-    //   console.log('stops: ', this.stops)
-    // });
-  }
-
-  // getStops(){
-  
-  // }
-
-  goToBusPage(){
-    // this.navCtrl.push(BusNumberPage)
+  goToBusPage(stop){
+    this.busService.setStop(stop);
+    this.navCtrl.push(BusNumberPage);
   }
 
 }

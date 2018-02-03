@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { BusRoutesPage } from './bus-routes';
+// import { BusRoutesPage } from './bus-routes';
 
 @NgModule({
   declarations: [
-    BusRoutesPage,
+    // BusRoutesPage,
   ],
   imports: [
-    IonicPageModule.forChild(BusRoutesPage),
+    // IonicPageModule.forChild(BusRoutesPage),
   ],
 })
 export class BusRoutesPageModule {}
