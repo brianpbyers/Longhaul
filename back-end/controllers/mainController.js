@@ -14,6 +14,7 @@ const rtdPassword = process.env.rtdPassword || require('../config/env.js').rtdPa
 // let oneUpdate = {};
 // let updates = [];
 
+
 let getApi = (req, res)=>{
 	res.send('You got to the Get API request!');
 };
@@ -47,6 +48,8 @@ let getStops = (req, res)=>{
 
 //sends trip updates for the selected route, stop, and bus
 let getUpdate = (req,res)=>{
+	// res.send("TYPE OF ROUTE:",typeof(req.params.route), "TYPE OF STOP:", typeof(req.params.stop));
+
 	DB.Update.findAll({where:{route: req.params.route, stop: req.params.stop, bus:req.params.bus}})
 	.then((update)=>{
 		res.json(update);
@@ -100,6 +103,7 @@ let updateData = ()=>{
 		  			.then((buses)=>{
 		  				let totalToBuses = (Date.now()-StartTime)/1000;
 		  				console.log("SHOULD HAVE CREATED BUSES!  Took:",totalToBuses,"seconds");
+		  				console.log("This many updates:",updates.length);
 		  			});
 		  		});
 		  	});
