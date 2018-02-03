@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { BusServiceProvider } from '../../providers/bus-service/bus-service';
+
 import { EtaPage } from '../eta/eta';
 
 @IonicPage()
@@ -10,17 +12,22 @@ import { EtaPage } from '../eta/eta';
 })
 export class BusNumberPage {
 
+  buses: any;
+
   constructor(
-    public navCtrl: NavController, 
-    public navParams: NavParams) {
+    private navCtrl: NavController, 
+    private navParams: NavParams,
+    private busService: BusServiceProvider
+  ) {}
+
+  ionViewWillEnter(){
+    this.busService.getStops().subscribe((res) => {
+      this.buses = res.buses;
+    })
   }
 
-  goToRouteDataPage(){
+  goToEtaPage(bus){
+    this.busService.setBus(bus);
     this.navCtrl.push(EtaPage);
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad BusNumberPage');
-  }
-
 }

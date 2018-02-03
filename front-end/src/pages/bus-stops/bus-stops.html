@@ -6,27 +6,19 @@
 
 </ion-header>
 
-
 <ion-content padding>
-
-    <ion-content padding>
-        <div >
-          
-        </div>
-       <div class="scroller">
-          <ion-list [virtualScroll]="stops" [approxItemHeight]="'40px'">
-                <ion-item *virtualItem="let stop" (click)="selectStop()" >
-                  <div item-left [style.background-color]="stop.color" style="width: 60px; height:60px; border-radius:50%"></div>
-                    
-                   <h4>{{stop.name}}  </h4>
-                </ion-item>
-              </ion-list>
-          </div>
+    <div >
       
-        
-      
-       </ion-content>
-
-  <!-- <button ion-button (click)="goToBusPage()" >Select Your Bus</button> -->
+    </div>
+    <div class="scroller">
+      <ion-list [virtualScroll]="stops" [approxItemHeight]="'40px'">
+            <ion-item *virtualItem="let stop">
+              <div item-left [style.background-color]="stop.color" style="width: 60px; height:60px; border-radius:50%"></div>
+                
+                <h4>{{stop.name}}  </h4>
+              <ion-icon name="arrow-dropright" align="right" (click)="goToBusPage(stop)"></ion-icon>
+            </ion-item>
+          </ion-list>
+      </div>
 
 </ion-content>
