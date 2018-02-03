@@ -88,28 +88,57 @@ let updateData = ()=>{
 	      	});
 	      	}
 	    });
+	    let searchTime = Date.now();
 	  }
-	  DB.Update.destroy({where:{}})
-	  .then(()=>{
-		  DB.Update.bulkCreate(updates,{validate:true})
-		  .then((updates)=>{
-		  	let TotalTime = (Date.now()-StartTime)/1000;
-		  	console.log('created updates!!!!! took: ',TotalTime,'Seconds');
-		  	DB.Update.findAll({attributes:[DaBa.sequelize.literal('DISTINCT ON("bus") "bus", "route"')], raw: true})
-		  	.then((buses)=>{
-		  		DB.Bus.destroy({where:{}})
-		  		.then(()=>{
-		  			DB.Bus.bulkCreate(buses)
-		  			.then((buses)=>{
-		  				let totalToBuses = (Date.now()-StartTime)/1000;
-		  				console.log("SHOULD HAVE CREATED BUSES!  Took:",totalToBuses,"seconds");
-		  				console.log("This many updates:",updates.length);
-		  			});
+	  DB.Update.count().then((numUpdates)=>{
+	  	console.log('updating, then destroying',numUpdates,'updates');
+	  	DB.Update.bulkCreate(updates, {validate:true})
+	  	.then(()=>{
+	  		DB.Update.destroy({where:{}, limit: numUpdates})
+	  		.then(()=>{
+		  		let totalTime = (Date.now()-StartTime)/1000;
+		  		let deleteTime = (Date.now()-StartTime)/1000;
+		  		DB.Update.findAll({attributes:[DaBa.sequelize.literal('DISTINCT ON("bus") "bus", "route"')], raw: true})
+			  	.then((buses)=>{
+			  		DB.Bus.destroy({where:{}})
+			  		.then(()=>{
+			  			DB.Bus.bulkCreate(buses)
+			  			.then((buses)=>{
+			  				let totalToBuses = (Date.now()-totalTime -StartTime)/1000;
+			  				console.log("SHOULD HAVE CREATED BUSES!  Took:",totalToBuses,"seconds");
+		  					console.log("Total Time:",totalTime);
+		 			 		console.log("Delete Time:",deleteTime);
+			  				console.log("This many updates:",updates.length);
+			  			});
+			  		});
 		  		});
 		  	});
 
-		  });
-		});
+	  	});
+	  });
+	 //  DB.Update.destroy({where:{}})
+	 //  .then(()=>{
+		//   DB.Update.bulkCreate(updates,{validate:true})
+		//   .then((updates)=>{
+		//   	let TotalTime = (Date.now()-StartTime)/1000;
+		//   	let deleteTime = (Date.now()-StartTime)/1000;
+		//   	console.log('created updates!!!!! took: ',TotalTime,'Seconds');
+		//   	console.log('time without any updates:', deleteTime,'Seconds')
+		//   	DB.Update.findAll({attributes:[DaBa.sequelize.literal('DISTINCT ON("bus") "bus", "route"')], raw: true})
+		//   	.then((buses)=>{
+		//   		DB.Bus.destroy({where:{}})
+		//   		.then(()=>{
+		//   			DB.Bus.bulkCreate(buses)
+		//   			.then((buses)=>{
+		//   				let totalToBuses = (Date.now()-StartTime)/1000;
+		//   				console.log("SHOULD HAVE CREATED BUSES!  Took:",totalToBuses,"seconds");
+		//   				console.log("This many updates:",updates.length);
+		//   			});
+		//   		});
+		//   	});
+
+		//   });
+		// });
 	});
 
 };
