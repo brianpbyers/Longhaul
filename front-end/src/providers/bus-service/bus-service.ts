@@ -1,12 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+import { BusStopsPage } from '../../pages/bus-stops/bus-stops';
+
 
 @Injectable()
 export class BusServiceProvider {
 
-  busRoute: any;
-  busStop: string;
+  selectedRoute: any;
+  busStop: any;
   busNumber: string;
 
   constructor(
@@ -19,9 +21,15 @@ export class BusServiceProvider {
   }
 
   // gets all of the stops
-  getStops(){
-    return this.http.get('http://localhost:3000/api/stops')
+  getStops(selectedRoute){
+    console.log( 'selected Route: ', selectedRoute);
+
+    this.selectedRoute = selectedRoute;
+    console.log( 'route name: ', this.selectedRoute.name);
+
+    const stopsURL = `http://localhost:3000/api/stops/${this.selectedRoute.name}`;
+
+    this.busStop = this.http.get(stopsURL);
+    console.log('bus stops: ', this.busStop);
   }
-
-
 }
