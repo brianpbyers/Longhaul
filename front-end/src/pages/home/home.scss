@@ -1,3 +1,25 @@
 page-home {
+   
+    ion-content{
+        background: color($colors, light) !important
+    }
+}
+
+.main{
+    color: color($colors, primary);
+    font-size: 44px;
+    text-align: center;
 
 }
+.bodytext{
+    color: color($colors, primary);
+    font-size: 24px;
+    text-align: center;
+}
+
+// .button{
+//     font-size: 30px;
+//     text-align: center;
+//     justify-content: center;
+// }
+

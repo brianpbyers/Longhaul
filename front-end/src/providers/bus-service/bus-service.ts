@@ -34,10 +34,12 @@ export class BusServiceProvider {
     console.log('selected route', this.selectedRoute)
   }
 
+
   setStop(stop){
     console.log('stop to save', stop);
     this.selectedStop = stop;
     console.log('selected stop', this.selectedStop)
+
   }
 
   setBus(bus){
