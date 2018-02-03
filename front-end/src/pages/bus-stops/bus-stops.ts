@@ -21,19 +21,17 @@ export class BusStopsPage implements OnInit {
   ) {}
 
   ngOnInit(){
-    //   this.busService.getStops(stop).subscribe((response) => {
-    //   this.stops = response
-    //   console.log('stops ', this.stops);
-    //  })
+    this.busService.busStop.subscribe();
+    console.log( 'here are your stops ', this.stops);
   }
 
-  ionViewWillLoad(){
-    const selectedRoute = this.navParams.get('name');
-    console.log(selectedRoute);
-    this.busService.getStops(selectedRoute).subscribe((response) => {
-      this.stops = response;
-      console.log('stops: ', this.stops)
-    }); 
+  ionViewDidLoad(){
+    // const selectedRoute = this.navParams.get('name');
+    // console.log('bus stops page: ', selectedRoute);
+    // this.busService.getStops(selectedRoute).subscribe((response) => {
+    //   this.stops = response;
+    //   console.log('stops: ', this.stops)
+    // });
   }
 
   // getStops(){
@@ -41,7 +39,7 @@ export class BusStopsPage implements OnInit {
   // }
 
   goToBusPage(){
-    this.navCtrl.push(BusNumberPage)
+    // this.navCtrl.push(BusNumberPage)
   }
 
 }

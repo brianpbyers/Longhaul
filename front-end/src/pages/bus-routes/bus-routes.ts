@@ -13,6 +13,7 @@ import { BusStopsPage } from '../bus-stops/bus-stops';
 export class BusRoutesPage implements OnInit {
 
   routes: any;
+  selectedRoute: any;
 
   constructor(
     private navCtrl: NavController, 
@@ -35,10 +36,14 @@ export class BusRoutesPage implements OnInit {
 
   goToStopsPage(route){
     // console.log(route);
-    const selectedRoute = route;
+    this.selectedRoute = route;
     // console.log(selectedRoute);
-    this.busService.getStops(selectedRoute)
-    this.navCtrl.push(BusStopsPage)
+    this.busService.getStops(this.selectedRoute)
+    this.ionViewWillLeave();
+  }
+
+  ionViewWillLeave(){
+    this.navCtrl.push(BusStopsPage, this.selectedRoute);
   }
 
 }
