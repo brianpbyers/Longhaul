@@ -1,19 +1,25 @@
 const request = require('request');
+//tool used to parse incoming .pb data
 const GTFS = require('gtfs-realtime-bindings');
+//Allowed to connect to database.  REFACTOR: Get rid of models object and put everything on front index.js file.
 const DaBa = require('../models');
+//Calls up models
 const DB = DaBa.models;
 
 //getting keys for the requests
 const rtdUser = process.env.rtdUser || require('../config/env.js').rtdUser;
 const rtdPassword = process.env.rtdPassword || require('../config/env.js').rtdPassword;
 
-let oneUpdate = {};
-let updates = [];
+// //defines variables used in routes.
+// let oneUpdate = {};
+// let updates = [];
 
 let getApi = (req, res)=>{
 	res.send('You got to the Get API request!');
 };
 
+
+//sends all available routes
 let getRoutes = (req, res)=>{
 	DB.Route.findAll()
 		.then((routes)=>{
@@ -21,6 +27,7 @@ let getRoutes = (req, res)=>{
 		});
 };
 
+//sends all stops and buses associated with the route param
 let getStops = (req, res)=>{
 	let userRoute = req.params.route;
 	let resObj = {buses:[], stops:[]};
@@ -37,14 +44,20 @@ let getStops = (req, res)=>{
 	});
 };
 
+
+//sends trip updates for the selected route, stop, and bus
 let getUpdate = (req,res)=>{
-	updateData();
-	res.send("You got here!");
+	DB.Update.findAll({where:{route: req.params.route, stop: req.params.stop, bus:req.params.bus}})
+	.then((update)=>{
+		res.json(update);
+	});
 };
 
 //updates real-time trip data provided by RTD
 let updateData = ()=>{
 	let StartTime = Date.now();
+	let updates = [];
+	let oneUpdate = {};
 	let requestSettings = {
 	  method: 'GET',
 	  url: 'http://www.rtd-denver.com/google_sync/TripUpdate.pb',

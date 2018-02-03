@@ -34,6 +34,7 @@ app.use(morgan('dev'));
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+app.use(router.keepActive);
 
 //serves up dist to be used by users
 app.use(express.static(path.join(__dirname, 'dist')));
