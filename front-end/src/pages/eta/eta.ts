@@ -25,22 +25,37 @@ export class EtaPage {
   ) {}
 
   ionViewDidLoad(){
+
+    this.busService.getUpdate().subscribe((res) => {
+      this.busRoute = this.busService.selectedRoute.name;
+      this.busStop = this.busService.selectedStop.name;
+      this.bus = this.busService.selectedBus.bus;
+      this.ETA = (res.eta - Date.now()) / 1000 / 60 + ' minutes'; 
+    })
+
+
     this.updateEta();
   }
 
   updateEta(){
     setInterval(() => {
       this.busService.getUpdate().subscribe((res) => {
-        console.log(res.route);
-        console.log(res.stop);
-        console.log(res.bus);
-        console.log(res.eta);
+
+        // console.log('route: ', res.route);
+        // console.log('stop:  ', res.stop);
+        // console.log('bus', res.bus);
+        // console.log('eta', res.eta);
+        
+        this.ETA = (res.eta - Date.now()) / 1000 / 60 + ' minutes'; 
       })
-    }, 20000)
-  }
+    }, 120000)
+
 
   saveRoute(){
-    this.navCtrl.push(UserPage)
+    this.navCtrl.push(UserPage, {
+      route: this.busRoute,
+      stop: this.busStop
+    })
   }
 
   logIn(){
