@@ -7,7 +7,7 @@
     "install": "cd front-end && npm install",
     "deploy": "echo deploy && ionic build --aot --prod && cd ..",
     "start": "node back-end/server.js",
-    "postinstall": "cd front-end && npm build && cd back-end && npm install",
+    "postinstall": "cd front-end && ionic build --prod && cd ../back-end && npm install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
