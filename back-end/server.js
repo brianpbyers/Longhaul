@@ -37,7 +37,7 @@ app.use(bodyParser.json());
 app.use(router.keepActive);
 
 //serves up dist to be used by users
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, 'www')));
 
 
 // //Session is used to genereate a hash.  Users denied without the secret.
