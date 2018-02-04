@@ -24,7 +24,7 @@ let getApi = (req, res)=>{
 let getRoutes = (req, res)=>{
 	DaBa.sequelize.query(`SELECT * FROM routes JOIN (SELECT DISTINCT (route) route FROM updates) AS potato ON routes.name = potato.route;`)
 		.then((routes)=>{
-			res.json(routes);
+			res.json(routes[0]);
 		});
 };
 
