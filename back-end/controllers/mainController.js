@@ -22,26 +22,28 @@ let getApi = (req, res)=>{
 
 //sends all available routes
 let getRoutes = (req, res)=>{
-	DB.Route.findAll()
+	DaBa.sequelize.query(`SELECT * FROM routes JOIN (SELECT DISTINCT (route) route FROM updates) AS potato ON routes.name = potato.route;`)
 		.then((routes)=>{
 			res.json(routes);
 		});
 };
 
+let getBuses = (req, res)=>{
+	let userRoute = req.params.route;
+	DB.Bus.findAll({where:{route:userRoute}})
+	.then((buses)=>{
+		res.json(buses);
+	});
+
+};
+
 //sends all stops and buses associated with the route param
 let getStops = (req, res)=>{
 	let userRoute = req.params.route;
-	let resObj = {buses:[], stops:[]};
-	DB.Bus.findAll({where:{route:userRoute}})
-	.then((buses)=>{
-		resObj.buses = buses;
-		console.log('found buses!',...buses);
-		DaBa.sequelize.query(`select * from (select distinct on (route, stop) route, stop from updates where route = '${userRoute}') potato JOIN stops ON potato.stop=stops.number;`)
-		 .then((stops)=>{
-		 	console.log('sorta found stops',...stops[0]);
-		 	resObj.stops = stops[0];
-		 	res.json(resObj);
-		});
+	let userBus = req.params.bus;
+	DaBa.sequelize.query(`select * from (select distinct on (route, stop) route, stop from updates where route = '${userRoute}' and bus = '${userBus}') potato JOIN stops ON potato.stop=stops.number;`)
+	 .then((stops)=>{
+	 	res.json(stops[0]);
 	});
 };
 
@@ -123,6 +125,7 @@ let updateData = ()=>{
 
 module.exports.getApi = getApi;
 module.exports.getRoutes = getRoutes;
+module.exports.getBuses = getBuses;
 module.exports.getStops = getStops;
 module.exports.getUpdate = getUpdate;
 module.exports.updateData = updateData;
