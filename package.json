@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "deploy": "cd front-end && ionic build --aot --prod -op ../back-end && cd ..",
+    "deploy": "cd front-end && ionic build --aot --prod && mv www ../back-end && cd ..",
     "start": "node back-end/server.js",
     "postinstall": "cd back-end && npm install",
     "test": "echo \"Error: no test specified\" && exit 1"
