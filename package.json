@@ -22,6 +22,7 @@
   "homepage": "https://github.com/brianpbyers/Project-3#readme",
   "devDependencies": {
     "chai": "^4.1.2",
+    "eb-fix-npm": "^1.2.5",
     "mocha": "^5.0.0"
   },
   "dependencies": {
