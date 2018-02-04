@@ -25,9 +25,18 @@ export class EtaPage {
   ) {}
 
   ionViewDidLoad(){
-    this.busService.getUpdate().subscribe((res) => {
-      console.log(res);
-    })
+    this.updateEta();
+  }
+
+  updateEta(){
+    setInterval(() => {
+      this.busService.getUpdate().subscribe((res) => {
+        console.log(res.route);
+        console.log(res.stop);
+        console.log(res.bus);
+        console.log(res.eta);
+      })
+    }, 20000)
   }
 
   saveRoute(){
