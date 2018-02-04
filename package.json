@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "install": "cd front-end && npm install && echo hi && ionic build --aot --prod && echo built",
+    "install": "cd front-end && npm install && ionic build -prod && echo built",
     "deploy": "echo deploy && ionic build --aot --prod && cd ..",
     "start": "node back-end/server.js",
     "postinstall": "cd back-end && npm install",
