@@ -53,7 +53,7 @@ router.route('/api')
 router.route('/api/routes')
 	.get(mainController.getRoutes);
 
-router.route('/api/bus/:route')
+router.route('/api/buses/:route')
 	.get(mainController.getBuses);
 
 router.route('/api/stops/:route/:bus')
