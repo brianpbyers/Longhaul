@@ -4,9 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "install": "cd front-end && npm install",
-    "build": "cd front-end && ionic build --prod",
-    "deploy": "ionic build --aot -prod && mv www ../back-end && cd ..",
+    "install": "cd front-end && npm install && echo hi",
+    "deploy": "ionic build --aot --prod && cd ..",
     "start": "node back-end/server.js",
     "postinstall": "cd back-end && npm install",
     "test": "echo \"Error: no test specified\" && exit 1"
