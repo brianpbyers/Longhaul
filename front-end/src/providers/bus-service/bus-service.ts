@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class BusServiceProvider {
 
+// sets up variables to pass data along user flow
   selectedRoute: any;
   selectedStop: any;
   selectedBus: any;
@@ -13,6 +14,7 @@ export class BusServiceProvider {
   constructor(
     private http: HttpClient
   ) {
+    // sets url's for dev/prod modes
     if (isDevMode()) {
       this.baseUrl = 'http://localhost:3000/';
     } else {
@@ -35,20 +37,21 @@ export class BusServiceProvider {
     console.log('selected route', this.selectedRoute)
   }
 
-
+  // sets current stop
   setStop(stop){
     console.log('stop to save', stop);
     this.selectedStop = stop;
     console.log('selected stop', this.selectedStop)
   }
 
+  // sets current bus
   setBus(bus){
     console.log('bus to save', bus);
     this.selectedBus = bus;
     console.log('selected bus', this.selectedBus);
   }
 
-
+  // gets all the buses
   getBuses(): any{
     const busURL = `${this.baseUrl}/api/buses/${this.selectedRoute.name}`;
 
@@ -63,7 +66,7 @@ export class BusServiceProvider {
     // console.log('bus stops: ', this.busStop);
   }
 
-
+  // updates the eta time of the user's current bus
   getUpdate(): Observable<any>{
     const etaURL = `${this.baseUrl}/api/update/${this.selectedRoute.name}/${this.selectedStop.number}/${this.selectedBus.bus}`;
 
