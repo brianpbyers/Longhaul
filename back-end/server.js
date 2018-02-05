@@ -13,6 +13,8 @@ const session = require('express-session');
 //helps route requests
 const router = require('./config/routes');
 
+require('dotenv').config();
+
 
 
 
