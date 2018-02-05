@@ -62,4 +62,4 @@ app.use('/', router);
 
 
 
-app.listen(process.env.PORT || 3000, console.log("Potato Server Listening on Port:", process.env ||3000));
+app.listen(process.env.PORT || 3000, console.log("Potato Server Listening on Port:", process.env.PORT ||3000));
