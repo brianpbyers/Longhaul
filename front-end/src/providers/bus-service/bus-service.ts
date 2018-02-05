@@ -48,6 +48,7 @@ export class BusServiceProvider {
     console.log('selected bus', this.selectedBus);
   }
 
+
   getBuses(): any{
     const busURL = `${this.baseUrl}/api/buses/${this.selectedRoute.name}`;
 
@@ -61,6 +62,7 @@ export class BusServiceProvider {
     return this.http.get(stopsURL);
     // console.log('bus stops: ', this.busStop);
   }
+
 
   getUpdate(): Observable<any>{
     const etaURL = `${this.baseUrl}/api/update/${this.selectedRoute.name}/${this.selectedStop.number}/${this.selectedBus.bus}`;
