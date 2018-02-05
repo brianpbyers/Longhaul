@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { BusServiceProvider } from '../../providers/bus-service/bus-service';
 
-import { BusStopsPage } from '../bus-stops/bus-stops';
+import { BusNumberPage } from '../bus-number/bus-number';
 
 @IonicPage()
 @Component({
@@ -28,9 +28,9 @@ export class BusRoutesPage{
     }); 
   }
 
-  goToStopsPage(route){
+  goToBusPage(route){
     // console.log(route);
     this.busService.setRoute(route);
-    this.navCtrl.push(BusStopsPage);  
+    this.navCtrl.push(BusNumberPage);  
   }
 }

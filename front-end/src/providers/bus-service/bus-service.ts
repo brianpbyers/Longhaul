@@ -19,14 +19,6 @@ export class BusServiceProvider {
     return this.http.get('http://localhost:3000/api/routes');
   }
 
-  // gets all of the stops
-  getStops(): any{
-    const stopsURL = `http://localhost:3000/api/stops/${this.selectedRoute.name}`;
-
-    return this.http.get(stopsURL);
-    // console.log('bus stops: ', this.busStop);
-  }
-
   // sets current route
   setRoute(route){
     console.log('route to save', route);
@@ -39,7 +31,6 @@ export class BusServiceProvider {
     console.log('stop to save', stop);
     this.selectedStop = stop;
     console.log('selected stop', this.selectedStop)
-
   }
 
   setBus(bus){
@@ -48,7 +39,23 @@ export class BusServiceProvider {
     console.log('selected bus', this.selectedBus);
   }
 
-  getUpdate(): any{
+
+  getBuses(): any{
+    const busURL = `http://localhost:3000/api/buses/${this.selectedRoute.name}`;
+
+    return this.http.get(busURL);
+  }
+
+  // gets all of the stops
+  getStops(): any {
+    const stopsURL = `http://localhost:3000/api/stops/${this.selectedRoute.name}/${this.selectedBus.bus}`;
+
+    return this.http.get(stopsURL);
+    // console.log('bus stops: ', this.busStop);
+  }
+
+
+  getUpdate(): Observable<any>{
     const etaURL = `http://localhost:3000/api/update/${this.selectedRoute.name}/${this.selectedStop.number}/${this.selectedBus.bus}`;
 
     return this.http.get(etaURL);
