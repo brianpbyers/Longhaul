@@ -2,7 +2,7 @@ let Sequelize = require('sequelize');
 
 let compName = process.env.compName||require('../config/env.js').compName;
 
-let sequelize = new Sequelize(process.env.DATABASE_URL || `postgres://${compName}@localhost:5432/longhaul`);
+let sequelize = new Sequelize(process.env.HEROKU_POSTGRESQL_AQUA_URL || `postgres://${compName}@localhost:5432/longhaul`);
 
 module.exports.sequelize = sequelize;
 module.exports.Sequelize = Sequelize;

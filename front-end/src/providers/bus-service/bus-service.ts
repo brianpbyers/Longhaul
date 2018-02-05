@@ -1,22 +1,33 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class BusServiceProvider {
 
+// sets up variables to pass data along user flow
   selectedRoute: any;
   selectedStop: any;
   selectedBus: any;
 
   constructor(
     private http: HttpClient
-  ) {}
+  ) {
+    // sets url's for dev/prod modes
+    if (isDevMode()) {
+      this.baseUrl = 'http://localhost:3000/';
+    } else {
+      this.baseUrl = '';
+    }
+  }
+
+  baseUrl: string;
 
   // gets all of the routes
   getRoutes(){
-    return this.http.get('http://localhost:3000/api/routes');
+    console.log('here')
+    return this.http.get(`${this.baseUrl}/api/routes`);
   }
 
   // sets current route
@@ -26,39 +37,41 @@ export class BusServiceProvider {
     console.log('selected route', this.selectedRoute)
   }
 
-
+  // sets current stop
   setStop(stop){
     console.log('stop to save', stop);
     this.selectedStop = stop;
     console.log('selected stop', this.selectedStop)
   }
 
+  // sets current bus
   setBus(bus){
     console.log('bus to save', bus);
     this.selectedBus = bus;
     console.log('selected bus', this.selectedBus);
   }
 
-
+  // gets all the buses
   getBuses(): any{
-    const busURL = `http://localhost:3000/api/buses/${this.selectedRoute.name}`;
+    const busURL = `${this.baseUrl}/api/buses/${this.selectedRoute.name}`;
 
     return this.http.get(busURL);
   }
 
   // gets all of the stops
   getStops(): any {
-    const stopsURL = `http://localhost:3000/api/stops/${this.selectedRoute.name}/${this.selectedBus.bus}`;
+    const stopsURL = `${this.baseUrl}/api/stops/${this.selectedRoute.name}/${this.selectedBus.bus}`;
 
     return this.http.get(stopsURL);
     // console.log('bus stops: ', this.busStop);
   }
 
-
+  // updates the eta time of the user's current bus
   getUpdate(): Observable<any>{
-    const etaURL = `http://localhost:3000/api/update/${this.selectedRoute.name}/${this.selectedStop.number}/${this.selectedBus.bus}`;
+    const etaURL = `${this.baseUrl}/api/update/${this.selectedRoute.name}/${this.selectedStop.number}/${this.selectedBus.bus}`;
 
     return this.http.get(etaURL);
   }
+
 
 }
