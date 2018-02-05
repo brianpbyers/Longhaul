@@ -13,6 +13,9 @@ import { EtaPage } from '../eta/eta';
 export class BusStopsPage  {
 
   stops: any;
+  selectedRoute: any;
+  routeDescription: any;
+  selectedBus: any;
 
   constructor(
     private navCtrl: NavController, 
@@ -24,6 +27,10 @@ export class BusStopsPage  {
     this.busService.getStops().subscribe((res) => {
       this.stops = res;
       console.log( 'here', this.stops);
+    this.selectedRoute = this.busService.selectedRoute.name;
+    this.routeDescription = this.busService.selectedRoute.description;
+    this.selectedBus = this.busService.selectedBus.bus;
+    console.log('selected bus is: ', this.selectedBus);
     })
   }
 
