@@ -1,17 +1,22 @@
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>busNumber</ion-title>
+  <ion-navbar color="dark">
+    <ion-title>Bus Number</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content padding>
-  <div>
-    <h6>current route:</h6>
-    <h6>{{selectedRoute}}</h6>
-    <h6>{{routeDescription}}</h6>
-  </div>
+
+    <div class="routes-card">
+        <ion-card>
+            <img src="../../assets/imgs/buswindow4.jpg"/>
+            <div class="card-title">Your Bus Route: {{selectedRoute}}</div>
+            <div class="card-subtitle">{{routeDescription}}</div>
+          </ion-card>
+        </div>
+
+   
   <div class="scroller">
     <ion-list [virtualScroll]="buses" [approxItemHeight]="'40px'">
       <ion-item *virtualItem="let bus">
@@ -24,6 +29,7 @@
       </ion-item>
     </ion-list>
   </div>
+  
 
 </ion-content>
 
