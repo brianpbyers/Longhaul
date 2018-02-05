@@ -30,7 +30,7 @@ export class EtaPage {
       this.busRoute = this.busService.selectedRoute.name;
       this.busStop = this.busService.selectedStop.name;
       this.bus = this.busService.selectedBus.bus;
-      this.ETA = (res.eta - Date.now()) / 1000 / 60 + ' minutes'; 
+      this.ETA = Math.floor((res.eta - Date.now()) / 1000 / 60) + ' minutes'; 
     })
 
 
