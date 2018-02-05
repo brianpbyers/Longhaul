@@ -13,6 +13,8 @@ import { BusStopsPage } from '../bus-stops/bus-stops';
 export class BusNumberPage {
 
   buses: any;
+  selectedRoute: any;
+  routeDescription: any;
 
   constructor(
     private navCtrl: NavController, 
@@ -24,6 +26,10 @@ export class BusNumberPage {
     this.busService.getBuses().subscribe((res) => {
       console.log(res)
       this.buses = res;
+    this.selectedRoute = this.busService.selectedRoute.name;
+    this.routeDescription = this.busService.selectedRoute.description;
+    console.log('this is your route: ', this.selectedRoute, this.routeDescription)
+    // console.log('made it here');
     })
   }
 

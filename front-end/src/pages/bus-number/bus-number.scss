@@ -6,6 +6,7 @@ page-bus-number {
         ion-card {
         position: relative;
         text-align: center;
+        height: 18vh;
         }
     
         .card-title {
@@ -18,8 +19,9 @@ page-bus-number {
         }
     
         .card-subtitle {
-        font-size: 1.0em;
+        font-size: 1.5em;
         position: absolute;
+        padding-top: 10px;
         top: 52%;
         width: 100%;
         color: #fff;

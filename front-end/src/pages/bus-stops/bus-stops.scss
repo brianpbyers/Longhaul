@@ -1,11 +1,14 @@
 page-bus-stops {
 
 
+
+}
 .routes-card {
     
     ion-card {
     position: relative;
     text-align: center;
+    height: 18vh;
     }
 
     .card-title {
@@ -18,12 +21,19 @@ page-bus-stops {
     }
 
     .card-subtitle {
-    font-size: 1.0em;
+    font-size: 1.5em;
     position: absolute;
+    padding-top: 10px;
     top: 52%;
     width: 100%;
     color: #fff;
+    font-weight: bold;
     }
     
 }
+h2{
+    text-align: center;
+}
+.scroller{
+    color: 757575
 }

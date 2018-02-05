@@ -8,10 +8,15 @@
 
 <ion-content padding>
 
-  <div>
-      
+    <div class="routes-card">
+        <ion-card>
+            <img src="../../assets/imgs/buswindow4.jpg"/>
+            <div class="card-title">Your Bus Route: {{selectedRoute}}</div>
+            <div class="card-subtitle">{{routeDescription}}</div>
+          </ion-card>
+        </div>
 
-  </div>
+   
   <div class="scroller">
     <ion-list [virtualScroll]="buses" [approxItemHeight]="'40px'">
       <ion-item *virtualItem="let bus">
