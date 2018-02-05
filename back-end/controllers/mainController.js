@@ -3,6 +3,7 @@ const request = require('request');
 const GTFS = require('gtfs-realtime-bindings');
 //Allowed to connect to database.  REFACTOR: Get rid of models object and put everything on front index.js file.
 const DaBa = require('../models');
+const Op = DaBa.Sequelize.Op;
 //Calls up models
 const DB = DaBa.models;
 
@@ -24,7 +25,7 @@ let getApi = (req, res)=>{
 let getRoutes = (req, res)=>{
 	DaBa.sequelize.query(`SELECT * FROM routes JOIN (SELECT DISTINCT (route) route FROM updates) AS potato ON routes.name = potato.route;`)
 		.then((routes)=>{
-			res.json(routes);
+			res.json(routes[0]);
 		});
 };
 
@@ -96,7 +97,7 @@ let updateData = ()=>{
 	  	console.log('updating, then destroying',numUpdates,'updates');
 	  	DB.Update.bulkCreate(updates, {validate:true})
 	  	.then(()=>{
-	  		DB.Update.destroy({where:{}, limit: numUpdates})
+	  		DB.Update.destroy({where:{createdAt:{[Op.lt]:(Date.now()- 10000)}}})
 	  		.then(()=>{
 		  		let totalTime = (Date.now()-StartTime)/1000;
 		  		let deleteTime = (Date.now()-StartTime)/1000;
@@ -110,6 +111,7 @@ let updateData = ()=>{
 			  				console.log("SHOULD HAVE CREATED BUSES!  Took:",totalToBuses,"seconds");
 		  					console.log("Total Time:",totalTime);
 		 			 		console.log("Delete Time:",deleteTime);
+		 			 		console.log("should have destroyed",numUpdates, "updates");
 			  				console.log("This many updates:",updates.length);
 			  			});
 			  		});
