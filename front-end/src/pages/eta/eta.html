@@ -1,27 +1,45 @@
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>etaPage</ion-title>
+  <ion-navbar color= "dark">
+    <ion-title>Estimated Time of Arrival</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
-  <h3> {{busRoute}} </h3>
-  <h3> {{busStop}} </h3>
+  <div class="routes-card">
+    <ion-card>
+        <img src="../../assets/imgs/buswindow3.jpg"/>
+        <div class="card-title">Your Bus Route: <br> {{busRoute}} </div>
+        <!-- <div class="card-subtitle">{{busRoute.description}}</div> -->
+    </ion-card>
+    <ion-card>
+          <img src="../../assets/imgs/buswindow9.jpg"/>
+          <div class="card-title">Your Bus Stop: {{busStop}} </div>
+    </ion-card>
+    <ion-card>
+            <img src="../../assets/imgs/buswindow4.jpg"/>
+            <div class="card-title">Your Bus Number: {{busRoute}} </div>
+    </ion-card>
+    <ion-card>
+              <img src="../../assets/imgs/buswindow6.jpg"/>
+              <div class="card-title">Your ETA: {{ETA}} </div>
+    </ion-card>
+  </div>
+  <!-- <h3> {{busStop}} </h3>
   <h3> {{bus}} </h3>
-  <h2> {{ETA}} </h2>
+  <h2> {{ETA}} </h2> -->
 
   <div>
-    Alarm
+    <h2>Set Alarm Here</h2>
   </div>
 
   <!-- if the user is logged in already, display "save this route" -->
   <!-- if the user is not logged in, display "Login/Signup option" -->
-  <button ion-button (click)="saveRoute()" >Save Your Route</button>
-  <button ion-button (click)="logIn()" >Login to save this route</button>
-  
+  <div class="buttons">
+      <button ion-button (click)="saveRoute()" >Save Your Route</button>
+      <button ion-button (click)="logIn()" >Login to save this route</button>
+  </div>
 
 </ion-content>
