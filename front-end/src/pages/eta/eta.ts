@@ -46,9 +46,10 @@ export class EtaPage {
         // console.log('bus', res.bus);
         // console.log('eta', res.eta);
         
-        this.ETA = (res.eta - Date.now()) / 1000 / 60 + ' minutes'; 
+        this.ETA = Math.floor((res.eta - Date.now()) / 1000 / 60) + ' minutes'; 
       })
     }, 120000)
+  }
 
 
   saveRoute(){
@@ -61,5 +62,5 @@ export class EtaPage {
   logIn(){
     this.navCtrl.push(LoginPage)
   }
-
+  
 }
