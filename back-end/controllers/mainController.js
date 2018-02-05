@@ -66,7 +66,7 @@ let updateData = ()=>{
 	let oneUpdate = {};
 	let requestSettings = {
 	  method: 'GET',
-	  url: 'http://www.rtd-denver.com/google_sync/TripUpdate.pb',
+	  url: 'https://www.rtd-denver.com/google_sync/TripUpdate.pb',
 	  auth:{
 		user: rtdUser,
 		pass: rtdPassword,
