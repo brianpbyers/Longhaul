@@ -16,7 +16,7 @@ export class BusServiceProvider {
   ) {
     // sets url's for dev/prod modes
     if (isDevMode()) {
-      this.baseUrl = 'http://localhost:3000/';
+      this.baseUrl = 'http://localhost:3000';
     } else {
       this.baseUrl = '';
     }
