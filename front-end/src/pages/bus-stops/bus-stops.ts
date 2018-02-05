@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { BusServiceProvider } from '../../providers/bus-service/bus-service';
 
-import { BusNumberPage } from '../bus-number/bus-number';
+import { EtaPage } from '../eta/eta';
 
 @IonicPage()
 @Component({
@@ -22,14 +22,14 @@ export class BusStopsPage  {
 
   ionViewWillEnter(){
     this.busService.getStops().subscribe((res) => {
-      this.stops = res.stops;
+      this.stops = res;
       console.log( 'here', this.stops);
     })
   }
 
-  goToBusPage(stop){
+  goToEtaPage(stop){
     this.busService.setStop(stop);
-    this.navCtrl.push(BusNumberPage);
+    this.navCtrl.push(EtaPage);
   }
 
 }
