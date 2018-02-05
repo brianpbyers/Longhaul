@@ -62,6 +62,21 @@ router.route('/api/stops/:route/:bus')
 router.route('/api/update/:route/:stop/:bus')
 	.get(mainController.getUpdate);
 
+router.route('/api/login')
+	.post(mainController.postLogin);
+
+router.route('/api/signup')
+	.post(mainController.postSignup);
+
+router.route('/api/userroutes')
+	.get(mainController.getUserRoutes)
+	.post(mainController.postUserRoutes);
+
+router.route('/api/userroutes/:id')
+	.get(mainController.showUserRoute)
+	.put(mainController.editUserRoute)
+	.delete(mainController.deleteUserRoute);
+
 
 
 

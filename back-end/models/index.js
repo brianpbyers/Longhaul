@@ -16,8 +16,6 @@ let UserRoute = sequelize.import('./user_route');
 
 UserRoute.belongsTo(User);
 User.hasMany(UserRoute);
-UserRoute.hasOne(Route);
-UserRoute.hasOne(Stop);
 
 module.exports.models = {
 	Update: Update,
