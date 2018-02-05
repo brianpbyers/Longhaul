@@ -10,7 +10,7 @@ import { BusNumberPage } from '../bus-number/bus-number';
   selector: 'page-bus-routes',
   templateUrl: 'bus-routes.html'
 })
-export class BusRoutesPage{
+export class BusRoutesPage {
 
   routes: any;
 
