@@ -20,6 +20,7 @@ export class EtaPage {
   busStopNumber: any;
   bus: any;
   ETA: any;
+  isLoggedIn: boolean = false;
   
 
   constructor(
@@ -63,6 +64,7 @@ export class EtaPage {
   }) {
     if (this.userService.isLoggedIn == true) {
       // console.log(this.userService.isLoggedIn);
+      this.isLoggedIn = this.userService.isLoggedIn;
       this.navCtrl.push(UserPage, routeToSave);
     } else {
       this.navCtrl.push(SignupPage);
