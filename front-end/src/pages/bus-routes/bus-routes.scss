@@ -9,7 +9,7 @@ h4{
 }
 .scroller{
     height: 275px;
-    width: 100vw;
+    width: 100%;
     margin: 0 auto;
     margin-left: -60px;
     position: absolute;
@@ -18,4 +18,7 @@ h4{
 }
 .routes-padding{
     height: 225px;
+}
+ion-card{
+    height: 200px;
 }

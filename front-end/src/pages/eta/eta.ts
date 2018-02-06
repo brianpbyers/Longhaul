@@ -35,7 +35,7 @@ export class EtaPage {
 
 
     this.updateEta();
-  }
+  ;}
 
   updateEta(){
     setInterval(() => {
@@ -57,10 +57,10 @@ export class EtaPage {
       route: this.busRoute,
       stop: this.busStop
     })
-  }
+  };
 
   logIn(){
     this.navCtrl.push(LoginPage)
-  }
+  };
   
 }
