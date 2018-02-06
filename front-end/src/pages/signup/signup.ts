@@ -1,12 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { FormsModule } from '@angular/forms';
 
-/**
- * Generated class for the SignupPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { UserServiceProvider } from '../../providers/user-service/user-service';
+
+import { UserPage } from '../user/user';
 
 @IonicPage()
 @Component({
@@ -15,11 +13,27 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SignupPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  newUser = {
+    name: '',
+    password: ''
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SignupPage');
-  }
+  constructor(
+    private navCtrl: NavController, 
+    private navParams: NavParams,
+    private userService: UserServiceProvider
+  ) {}
 
+ createAccount(newUser){
+  // console.log(`new user ${this.newUser.user_name} created`)
+  // console.log(`new user password: ${this.newUser.user_password}`)
+  this.userService.signUp(newUser).then((result) => {
+    if (this.userService.isLoggedIn) {
+      alert(result);
+      this.navCtrl.push(UserPage)
+    }
+  }, (err) => {
+    alert(err);
+  });
+ }
 }
