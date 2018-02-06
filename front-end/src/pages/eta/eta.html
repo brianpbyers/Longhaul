@@ -56,10 +56,10 @@
   </div>
 
 
-  <div >
+  <div *ngIf="isLoggedIn" >
     <button ion-button (click)="saveRoute()" >Save Your Route</button>
   </div>
-  <div > 
+  <div *ngIf="!isLoggedIn" > 
     <button ion-button (click)="logIn()" >Log In/Save Route</button>
     <p>New user? <span (click)="signUp()" style="text-decoration:underline">Click here to sign up!</span></p>
   </div>
