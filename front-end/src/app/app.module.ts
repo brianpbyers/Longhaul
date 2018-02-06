@@ -20,6 +20,7 @@ import { SignupPage } from '../pages/signup/signup';
 import { UserPage } from '../pages/user/user';
 import { TabsPage } from '../pages/tabs/tabs';
 import { FavoritesPage } from '../pages/favorites/favorites';
+import { AboutPage } from '../pages/about/about';
 
 
 import { BusServiceProvider } from '../providers/bus-service/bus-service';
@@ -38,7 +39,8 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     SignupPage,
     UserPage,
     TabsPage,
-    FavoritesPage
+    FavoritesPage,
+    AboutPage
   ],
   imports: [
     BrowserModule,
@@ -59,7 +61,8 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     SignupPage,
     UserPage,
     TabsPage,
-    FavoritesPage
+    FavoritesPage,
+    AboutPage,
   ],
   providers: [
     StatusBar,
