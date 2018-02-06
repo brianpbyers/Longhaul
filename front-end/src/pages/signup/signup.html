@@ -9,21 +9,23 @@
 
 
 <ion-content padding class="signup">
-    <ion-list>
-        
-          <ion-item>
-            <ion-label fixed>Username</ion-label>
-            <ion-input type="text" value=""></ion-input>
-          </ion-item>
-        
-          <ion-item>
-            <ion-label fixed>Password</ion-label>
-            <ion-input type="password"></ion-input>
-          </ion-item>
-        
-        </ion-list>
-        <div padding>
-            <button block>Sign In</button>
-          </div>
-   
+  <form submit="createAccount(newUser)" >
+    
+    <ion-input type="text" name="userName" [(ngModel)]="newUser.name" placeholder="user name" ></ion-input>
+
+    <ion-input type="password" name="userPassword" [(ngModel)]="newUser.password" placeholder="password" ></ion-input>
+
+  </form>
+  <!-- <ion-list>
+      <ion-item>
+        <ion-label name="userName"></ion-label>
+        <ion-input type="text" [(ngModel)]="newUser.user_name" name="userName" ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label></ion-label>
+        <ion-input type="password" [(ngModel)]="newUser.user_password" name="userPassword" ></ion-input>
+      </ion-item>
+  </ion-list> -->
+  <button ion-button (click)="createAccount(newUser)" ></button>
 </ion-content>
