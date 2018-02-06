@@ -106,7 +106,7 @@ let updateData = ()=>{
 	  	DB.Update.bulkCreate(updates, {validate:true})
 	  	.then(()=>{
 	  		//deleting any records created over 10 seconds ago.  This will allow for recent updates to be retained, but old updates to be removed
-	  		DB.Update.destroy({where:{createdAt:{[Op.lt]:(Date.now()- 10000)}}})
+	  		DB.Update.destroy({where:{createdAt:{[Op.lt]:(Date.now()- 30000)}}})
 	  		.then(()=>{
 		  		let totalTime = (Date.now()-StartTime)/1000;
 		  		let deleteTime = (Date.now()-StartTime)/1000;
