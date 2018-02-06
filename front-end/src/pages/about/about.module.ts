@@ -3,8 +3,9 @@ import { IonicPageModule } from 'ionic-angular';
 
 @NgModule({
   declarations: [
+
   ],
   imports: [
   ],
 })
-export class TabsPageModule {}
+export class AboutPageModule {}

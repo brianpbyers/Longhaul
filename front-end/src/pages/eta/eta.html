@@ -10,20 +10,20 @@
 <ion-content padding>
   <div class="routes-card">
     <ion-card>
-        <img src="../../assets/imgs/buswindow3.jpg"/>
+        <img src="../../assets/imgs/Metro-train.jpg"/>
         <div class="card-title">Your Bus Route: </div>
         <div class="card-subtitle">{{busRoute}}</div>
     </ion-card>
     <ion-card>
-          <img src="../../assets/imgs/buswindow9.jpg"/>
+          <img src="../../assets/imgs/Inside.jpg"/>
           <div class="card-title">Your Bus Stop: {{busStop}} </div>
     </ion-card>
     <ion-card>
-            <img src="../../assets/imgs/buswindow4.jpg"/>
+            <img src="../../assets/imgs/Rainy-traffic.jpg"/>
             <div class="card-title">Your Bus Number: {{busRoute}} </div>
     </ion-card>
     <ion-card>
-              <img src="../../assets/imgs/buswindow5.jpg"/>
+              <img src="../../assets/imgs/Inside-bus-2.jpg"/>
               <div class="card-title">Your ETA: {{ETA}} </div>
     </ion-card>
   </div>
@@ -39,14 +39,14 @@
                    <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="notifyTime" (ionChange)="timeChange($event)"></ion-datetime>
                  </ion-item>
           
-                 <ion-item>
+                 <!-- <ion-item>
                      <ion-label>on the following days:</ion-label>
                  </ion-item>
           
                  <ion-item *ngFor="let day of days">
                      <ion-label>{{day.title}}</ion-label>
                      <ion-checkbox [(ngModel)]="day.checked" color="primary"></ion-checkbox>
-                 </ion-item>
+                 </ion-item> -->
           
              </ion-list>
   </div>
