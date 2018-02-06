@@ -8,8 +8,8 @@ const passport = require('passport');
 const morgan = require('morgan');
 //parses incoming req's
 const bodyParser = require('body-parser');
-//needed to keep users logged in
-const session = require('express-session');
+// //needed to keep users logged in
+// const session = require('express-session');
 //helps route requests
 const router = require('./config/routes');
 
@@ -40,14 +40,10 @@ app.use(router.keepActive);
 app.use(express.static(path.join(__dirname, 'www')));
 
 
-// //Session is used to genereate a hash.  Users denied without the secret.
-// //sets up passport
-// app.use(session({ secret: 'This is a long string of stuff to generate a hash' })); 
-// app.use(passport.initialize());
-// app.use(passport.session()); 
+app.use(passport.initialize());
 
-// // //basically, perform the passport.js function, which assigns authorization/authentication functionality
-// require('./config/passport')(passport);
+// //basically, perform the passport.js function, which assigns authorization/authentication functionality
+require('./config/passport')(passport);
 
 // //asigning currentUser
 // app.use((req,res,next)=>{

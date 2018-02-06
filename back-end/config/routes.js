@@ -2,7 +2,8 @@ const router = require('express').Router();
 
 const passport = require('passport');
 
-let mainController = require('../controllers/mainController.js');
+let mainController = require('../controllers/mainController');
+let authController = require('../controllers/authController');
 
 
 
@@ -61,6 +62,21 @@ router.route('/api/stops/:route/:bus')
 
 router.route('/api/update/:route/:stop/:bus')
 	.get(mainController.getUpdate);
+
+router.route('/api/login')
+	.post(authController.login);
+
+router.route('/api/signup')
+	.post(authController.signup);
+
+router.route('/api/userroutes')
+	.get(authController.hasGoodToken, mainController.getUserRoutes)
+	.post(authController.hasGoodToken,mainController.postUserRoutes);
+
+router.route('/api/userroutes/:id')
+	.get(authController.hasGoodToken,mainController.showUserRoute)
+	.put(authController.hasGoodToken,mainController.editUserRoute)
+	.delete(authController.hasGoodToken,mainController.deleteUserRoute);
 
 
 
