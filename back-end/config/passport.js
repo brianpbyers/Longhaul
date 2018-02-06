@@ -7,7 +7,7 @@ let User = DB.models.User;
 module.exports = function(passport){
     let opts = {};
     opts.secretOrKey = "SecretJWTString";
-    opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
+    opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
     passport.use(new jsonStrat(opts, (jwt_payload, done)=>{
         User.findById(jwt_payload.id)
         .then((user)=>{

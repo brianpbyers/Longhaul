@@ -14,15 +14,7 @@ module.exports = function(sequelize, Sequelize){
   }, {hooks: {
     beforeCreate: (user)=>{
       console.log('generating salt for new user');
-      bcrypt.genSalt((err,salt)=>{
-        if(err) console.log('there has been a salty error:',err);
-        console.log('salt:',salt);
-        bcrypt.hash(user.password, salt,(err, hash)=>{
-          if(err) console.log('there has been a hashy error:',err);
-          console.log('generating hash for new user:',hash);
-          user.password = hash;
-        })
-      })
+      user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync());
     }  
   }});
   return model;

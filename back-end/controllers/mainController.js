@@ -147,7 +147,7 @@ let postUserRoutes = (req, res)=>{
 	DB.UserRoute.create(req.body)
 	.then((route)=>{
 		res.json(route);
-	}
+	});
 }
 
 let showUserRoute = (req, res)=>{
@@ -160,8 +160,12 @@ let putUserRoute = (req, res)=>{
 	
 }
 
+let editUserRoute = (req, res)=>{
+	
+}
+
 let deleteUserRoute = (req, res)=>{
-	DB.UserRoute.destroy({where:{id=Number(req.params.id)}})
+	DB.UserRoute.destroy({where:{id:Number(req.params.id)}})
 	.then(()=>{
 		res.json("Success!");
 	})

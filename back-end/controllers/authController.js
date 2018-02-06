@@ -4,35 +4,36 @@ let User = DB.models.User;
 let bcrypt = require('bcrypt');
 let secretString = "SecretJWTString"
 
-let authenticate = (req, res)=>{
+let login = (req, res)=>{
     User.findAll({where:{
         username: req.body.name
     }})
     .then((user)=>{
-        if(!user.username){
+        if(!user[0].username){
             return res.status(403).send({success:false, msg: "No such user was found."});
         }else{
-            bcrypt.compare(req.body.password, user.password, (err, isValid)=>{
+            bcrypt.compare(req.body.password, user[0].password, (err, isValid)=>{
                 if(!isValid||err){
                     return res.status(403).send({success:false, msg: "Incorrect Password."})
                 }else{
-                    let token = jwt.encode(user, secretString);
-                    res.json({success: true, token: token});
+                    let token = jwt.encode(user[0], secretString);
+                    res.json({success: true, token: token, msg:"Welcome to Longhaul!"});
                 }
             });
         }
     });
 }
 
-let signUp = (req,res)=>{
+let signup = (req,res)=>{
     if(!req.body.name||!req.body.password){
         res.json({success: false, msg:"Please enter both a username AND a password"});
     }else{
+        console.log('req.body.name:',req.body.name);
         User.findAll({where:{
             username: req.body.name
         }})
         .then((user)=>{
-            if(user.username){
+            if(user[0].username){
                 return res.json({success: false, msg:"Username already exists.  Please choose another"});
             } else{
                 let newUser = {
@@ -52,7 +53,7 @@ let signUp = (req,res)=>{
 let hasGoodToken = (req, res, next)=>{
     if(req.headers.authorization && req.headers.authorization.split(' ')[0]==='Bearer'){
         let decodedToken = decodeToken(req);
-        return res.json({success: true, msg:"You have a token.  Now Change this to a next!", decodedToken.name});
+        return res.json({success: true, msg:"You have a token.  Now Change this to a next!", decodedToken});
     }else{
         return res.json({success: false, msg:"error: invalid token!"});
     }
@@ -64,7 +65,7 @@ let decodeToken = (req)=>{
     return jwt.decode(req.headers.authorization.split(' ')[1], secretString);
 }
 
-module.exports.authenticate=authenticate;
-module.exports.signUp=signUp;
+module.exports.login=login;
+module.exports.signup=signup;
 module.exports.hasGoodToken=hasGoodToken;
 module.exports.decodeToken=decodeToken;
