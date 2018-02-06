@@ -17,8 +17,8 @@ export class EtaPage {
 
   busRoute: any;
   busStop: any;
-  busStopNumber: any;
   bus: any;
+  busStopNumber: any;
   ETA: any;
   isLoggedIn: boolean = false;
   
@@ -30,10 +30,12 @@ export class EtaPage {
     private userService: UserServiceProvider
   ) {}
 
+
   ionViewWillEnter(){
     // verifying if user is logged in or not
     this.isLoggedIn = this.userService.isLoggedIn;
   }
+
 
   ionViewDidLoad() {
     // calls update function to get eta for current route/bus/stop
@@ -48,6 +50,7 @@ export class EtaPage {
     // calls function to periodically update eta time
     this.updateEta();
   ;}
+
 
   updateEta() {
     setInterval(() => {
@@ -68,17 +71,23 @@ export class EtaPage {
     route_name: this.busRoute,
     stop_number: this.busStopNumber
   }) {
-    if (this.userService.isLoggedIn == true) {
-      // console.log(this.userService.isLoggedIn);
-      
-      this.navCtrl.push(UserPage, routeToSave);
-    } else {
-      this.navCtrl.push(SignupPage);
-    }
-  }
+      if (this.userService.isLoggedIn == true) {
+        // console.log(this.userService.isLoggedIn);
+        this.userService.saveNewRoute(routeToSave);
+        this.navCtrl.push(UserPage);
+      } else {
+        this.navCtrl.push(LoginPage);
+      };
+    };
+
 
   logIn() {
-    this.navCtrl.push(LoginPage)
+    this.navCtrl.push(LoginPage);
   };
-  
-}
+
+  signUp(){
+    this.navCtrl.push(SignupPage);
+  }
+
+
+};

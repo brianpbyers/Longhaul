@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { UserServiceProvider } from '../../providers/user-service/user-service';
+
 import { BusNumberPage } from '../bus-number/bus-number';
 
 @IonicPage()
@@ -10,15 +12,27 @@ import { BusNumberPage } from '../bus-number/bus-number';
 })
 export class UserPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  userRoutes: any;
 
-  selectBus(){
-    this.navCtrl.push(BusNumberPage)
-  }
+  constructor(
+    private navCtrl: NavController, 
+    private navParams: NavParams,
+    private userService: UserServiceProvider
+  ) {}
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad UserPage');
-  }
+  ionViewWillEnter(){
+    this.userService.getRoutes().then((result) => {
+      console.log(result);
+      this.userRoutes = result;
+    })
+  };
+
+  // function for selecting a favorite route (will redirect to bus/stop select)
+
+  // function for editing a route
+    // possibly use a form?
+
+  //function for deleting a route
+
 
 }
