@@ -1,7 +1,7 @@
 page-bus-number {
 
-
-    .routes-card {
+}
+.routes-card {
         
         ion-card {
         position: relative;
@@ -19,7 +19,7 @@ page-bus-number {
         }
     
         .card-subtitle {
-        font-size: 1.5em;
+        font-size: 1.0em;
         position: absolute;
         padding-top: 10px;
         top: 52%;
@@ -28,6 +28,9 @@ page-bus-number {
         }
         
     }
+
+ion-icon{
+    font-size: 36px;
 }
 // .routes-card {
     

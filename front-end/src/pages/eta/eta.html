@@ -11,8 +11,8 @@
   <div class="routes-card">
     <ion-card>
         <img src="../../assets/imgs/buswindow3.jpg"/>
-        <div class="card-title">Your Bus Route: <br> {{busRoute}} </div>
-        <!-- <div class="card-subtitle">{{busRoute.description}}</div> -->
+        <div class="card-title">Your Bus Route: </div>
+        <div class="card-subtitle">{{busRoute}}</div>
     </ion-card>
     <ion-card>
           <img src="../../assets/imgs/buswindow9.jpg"/>
@@ -23,7 +23,7 @@
             <div class="card-title">Your Bus Number: {{busRoute}} </div>
     </ion-card>
     <ion-card>
-              <img src="../../assets/imgs/buswindow6.jpg"/>
+              <img src="../../assets/imgs/buswindow5.jpg"/>
               <div class="card-title">Your ETA: {{ETA}} </div>
     </ion-card>
   </div>
@@ -32,7 +32,27 @@
   <h2> {{ETA}} </h2> -->
 
   <div>
-    <h2>Set Alarm Here</h2>
+      <ion-list no-lines>
+          
+                 <ion-item>
+                   <ion-label>Notify me at: </ion-label>
+                   <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="notifyTime" (ionChange)="timeChange($event)"></ion-datetime>
+                 </ion-item>
+          
+                 <ion-item>
+                     <ion-label>on the following days:</ion-label>
+                 </ion-item>
+          
+                 <ion-item *ngFor="let day of days">
+                     <ion-label>{{day.title}}</ion-label>
+                     <ion-checkbox [(ngModel)]="day.checked" color="primary"></ion-checkbox>
+                 </ion-item>
+          
+             </ion-list>
+  </div>
+  <div>
+      <button (click)="addNotifications()" ion-button color="primary" full>Schedule</button>
+      <button (click)="cancelAll()" ion-button color="danger" full>Cancel all alarms</button>
   </div>
 
   <!-- **** Stretch Goal for this page -->
