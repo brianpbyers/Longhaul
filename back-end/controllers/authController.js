@@ -28,7 +28,6 @@ let signup = (req,res)=>{
     if(!req.body.name||!req.body.password){
         res.json({success: false, msg:"Please enter both a username AND a password"});
     }else{
-        console.log('req.body.name:',req.body.name);
         User.findAll({where:{
             username: req.body.name
         }})
