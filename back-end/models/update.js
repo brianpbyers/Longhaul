@@ -1,4 +1,5 @@
 module.exports = function(sequelize, Sequelize){
+//trip update model.  Contains all relevant data provided by RTD's real-time-data feed
   var model = sequelize.define('update', {
     trip: Sequelize.STRING,
     route: Sequelize.STRING,

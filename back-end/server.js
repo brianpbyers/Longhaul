@@ -32,13 +32,16 @@ require('dotenv').config();
     });
   }
 
+//provides logs of every server request
 app.use(morgan('dev'));
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+
+//used to update the last used time(to keep auto-update running), or reactivate the auto-update feature if server was shut down
 app.use(router.keepActive);
 
-//serves up dist to be used by users
+//serves up www to be loaded by users.
 app.use(express.static(path.join(__dirname, 'www')));
 
 
@@ -47,12 +50,7 @@ app.use(passport.initialize());
 // //basically, perform the passport.js function, which assigns authorization/authentication functionality
 require('./config/passport')(passport);
 
-// //asigning currentUser
-// app.use((req,res,next)=>{
-// 	res.locals.currentUser = req.user;
-// 	next();
-// });
-
+//sends all requests to router
 app.use('/', router);
 
 
