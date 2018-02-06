@@ -1,0 +1,1 @@
+webpackJsonp([3],{372:function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var r=t(0),u=(t(4),function(){return function(){}}());t.d(n,"FavoritesPageModuleNgFactory",function(){return o});var o=r.W(u,[],function(e){return r._10([r._11(512,r.i,r.S,[[8,[]],[3,r.i],r.s]),r._11(512,u,u,[])])})}});
