@@ -23,6 +23,7 @@ export class EtaPage {
   busStopNumber: any;
   ETA: any;
   isLoggedIn: boolean = false;
+
   
   notifyTime: any;
   notifications: any[] = [];
@@ -177,7 +178,9 @@ cancelAll(){
         this.userService.saveNewRoute(routeToSave);
         this.navCtrl.push(UserPage);
       } else {
+        
         this.navCtrl.push(LoginPage);
+        
       };
     };
 

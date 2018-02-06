@@ -138,7 +138,7 @@ export class UserServiceProvider {
       headers.append('Authorization', `Bearer ${this.authToken}`);
       
       this.http.get(`${this.baseUrl}/userroutes`, { headers : headers }).subscribe((data) => {
-        if (data.json().success) {
+        if (data.json()) {
           resolve(data.json());
         } else {
           reject(false);
@@ -156,7 +156,7 @@ export class UserServiceProvider {
       headers.append('Authorization', `Bearer ${this.authToken}`);
 
       this.http.get(`${this.baseUrl}/userroutes/${route.id}`, { headers : headers }).subscribe((data) => {
-        if (data.json().success) {
+        if (data.json()) {
           resolve(true);
         } else {
           resolve(false);
@@ -174,7 +174,7 @@ export class UserServiceProvider {
       headers.append('Authorization', `Bearer ${this.authToken}`);
 
       this.http.post(`${this.baseUrl}/userroutes`, routeToSave, { headers : headers }).subscribe((data) => {
-        if (data.json().success) {
+        if (data.json()) {
           resolve(true);
         } else {
           resolve(false);
@@ -192,7 +192,7 @@ export class UserServiceProvider {
       headers.append('Authorization', `Bearer ${this.authToken}`);
 
       this.http.put(`${this.baseUrl}/userroutes/${route.id}`, { headers : headers }).subscribe((data) => {
-        if (data.json().success) {
+        if (data.json()) {
           resolve(true);
         } else {
           resolve(false);
@@ -210,7 +210,7 @@ export class UserServiceProvider {
       headers.append('Authorization', `Bearer ${this.authToken}`);
 
       this.http.delete(`${this.baseUrl}/userroutes/${route.id}`, { headers : headers }).subscribe((data) => {
-        if (data.json().success) {
+        if (data.json()) {
           resolve(true);
         } else {
           resolve(false);

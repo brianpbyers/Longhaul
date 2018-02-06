@@ -23,7 +23,7 @@ export class UserPage {
 
   ionViewWillEnter(){
     this.userService.getRoutes().then((result) => {
-      console.log(result);
+      console.log('getRoutes results: ', result);
       this.userRoutes = result;
     })
   };
