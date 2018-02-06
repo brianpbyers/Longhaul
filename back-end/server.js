@@ -13,6 +13,8 @@ const bodyParser = require('body-parser');
 //helps route requests
 const router = require('./config/routes');
 
+require('dotenv').config();
+
 
 
 
