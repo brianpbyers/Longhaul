@@ -37,14 +37,10 @@
     "zone.js": "0.8.18"
   },
   "devDependencies": {},
-<<<<<<< HEAD
-  "description": "An Ionic project"
-=======
   "description": "An Ionic project",
   "cordova": {
     "plugins": {
       "de.appplant.cordova.plugin.local-notification": {}
     }
   }
->>>>>>> f4514f0ddb125761f8b95abfc1ecf31d668a3cd5
 }
