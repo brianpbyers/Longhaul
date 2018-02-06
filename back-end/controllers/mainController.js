@@ -7,6 +7,8 @@ const Op = DaBa.Sequelize.Op;
 //Calls up models
 const DB = DaBa.models;
 
+const Auth = require('./authController');
+
 //getting keys for the requests
 const rtdUser = process.env.rtdUser || require('../config/env.js').rtdUser;
 const rtdPassword = process.env.rtdPassword || require('../config/env.js').rtdPassword;
@@ -19,15 +21,6 @@ const rtdPassword = process.env.rtdPassword || require('../config/env.js').rtdPa
 let getApi = (req, res)=>{
 	res.send('You got to the Get API request!');
 };
-
-let postLogin = (req, res)=>{
-	res.json('Hello!  You have reached the login post request response');
-};
-
-let postSignup = (req, res)=>{
-	res.json('Gretings!  You have reached the post signup request response');
-};
-
 
 //sends all available routes
 let getRoutes = (req, res)=>{
@@ -134,17 +127,22 @@ let updateData = ()=>{
 };
 
 let getUserRoutes = (req, res)=>{
-	// DaBa.sequelize.query(`SELECT route_name, stop_number FROM user_routes WHERE 'userId'='${GET USER ID}' users_saved_routes JOIN routes ON users_saved_routes.route_name=routes.name routified JOIN stops ON routified.stop_number=stops.number`)
-	// .then((routes)=>{
-	// 	res.json(routes);
-	// })
-	res.json(req.body);
+	let user = Auth.decodeToken(req);
+	DaBa.sequelize.query(`SELECT route_name, stop_number FROM user_routes WHERE 'userId'='${user.id}' users_saved_routes JOIN routes ON users_saved_routes.route_name=routes.name routified JOIN stops ON routified.stop_number=stops.number`)
+	.then((routes)=>{
+		res.json(routes);
+	});
 }
 
 let postUserRoutes = (req, res)=>{
-	let newRoute = req.body;
-	// newRoute.userId = GET USER ID
-	DB.UserRoute.create(req.body)
+	let user = Auth.decodeToken(req);
+	let newRoute = {
+		userId: user.id,
+		route_name: req.body.route_name,
+		stop_number: req.body.stop_number
+	}
+
+	DB.UserRoute.create(newRoute)
 	.then((route)=>{
 		res.json(route);
 	});
@@ -156,12 +154,8 @@ let showUserRoute = (req, res)=>{
 	.then((route)=>{res.json(route)});
 }
 
-let putUserRoute = (req, res)=>{
-	
-}
-
 let editUserRoute = (req, res)=>{
-	
+
 }
 
 let deleteUserRoute = (req, res)=>{
@@ -171,8 +165,6 @@ let deleteUserRoute = (req, res)=>{
 	})
 }
 
-module.exports.postLogin = postLogin;
-module.exports.postSignup = postSignup;
 module.exports.getApi = getApi;
 module.exports.getRoutes = getRoutes;
 module.exports.getBuses = getBuses;
