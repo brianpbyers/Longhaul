@@ -55,7 +55,7 @@ export class EtaPage {
         this.ETA = Math.floor((res.eta - Date.now()) / 1000 / 60) + ' minutes'; 
       })
     }, 120000)
-  }
+  };
 
 
   saveRoute(routeToSave = {
