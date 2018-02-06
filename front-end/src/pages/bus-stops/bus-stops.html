@@ -1,18 +1,30 @@
 <ion-header>
 
   <ion-navbar color="dark">
-    <ion-title>busStops</ion-title>
+    <ion-title>Choose a Stop</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content padding>
-    <div >
+    <div class="routes-card">
+        <ion-card>
+            <img src="../../assets/imgs/buswindow5.jpg"/>
+            <div class="card-title">Your Bus Route: {{selectedRoute}}</div>
+            <div class="card-subtitle">{{routeDescription}}</div>
+          </ion-card>
+          <ion-card>
+              <img src="../../assets/imgs/buswindow8.jpeg"/>
+              <div class="card-title"> Your Bus Number: <br> {{selectedBus}}</div>
+          </ion-card>
+    </div>
+            <!-- </ion-card>
       <h6>{{selectedRoute}}</h6>
       <h6>{{routeDescription}}</h6>
-      <h6>{{selectedBus}}</h6>
-    </div>
+      <h6>{{selectedBus}}</h6> -->
+    
     <div class="scroller">
+      <h2>Choose your Stop:</h2>
       <ion-list [virtualScroll]="stops" [approxItemHeight]="'40px'">
             <ion-item *virtualItem="let stop">
               <div item-left [style.background-color]="stop.color" style="width: 60px; height:60px; border-radius:50%"></div>
@@ -22,5 +34,7 @@
             </ion-item>
           </ion-list>
       </div>
+     
+
 
 </ion-content>
