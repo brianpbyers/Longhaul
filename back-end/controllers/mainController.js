@@ -130,7 +130,7 @@ let updateData = ()=>{
 //returns all saved routes associated with the user
 let getUserRoutes = (req, res)=>{
 	let user = Auth.decodeToken(req);
-	DaBa.sequelize.query(`SELECT route_name, stop_number FROM user_routes WHERE 'userId'='${user.id}' users_saved_routes JOIN routes ON users_saved_routes.route_name=routes.name routified JOIN stops ON routified.stop_number=stops.number`)
+	DaBa.sequelize.query(`SELECT user_routes.route_name, user_routes.stop_number, stops.name, routes.description FROM user_routes JOIN stops on user_routes.stop_number=stops.number JOIN routes on user_routes.route_name=routes.name WHERE user_routes."userId"=${user.id}`)
 	.then((routes)=>{
 		res.json(routes);
 	});
