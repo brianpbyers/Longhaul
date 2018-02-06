@@ -4,9 +4,11 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
 import * as moment from 'moment';
 
 import { BusServiceProvider } from '../../providers/bus-service/bus-service';
+import { UserServiceProvider } from '../../providers/user-service/user-service';
 
 import { LoginPage } from '../login/login';
 import { UserPage } from '../user/user';
+import { SignupPage } from '../signup/signup';
 
 @IonicPage()
 @Component({
@@ -17,6 +19,7 @@ export class EtaPage {
 
   busRoute: any;
   busStop: any;
+  busStopNumber: any;
   bus: any;
   ETA: any;
   notifyTime: any;
@@ -30,6 +33,7 @@ export class EtaPage {
     public platform: Platform,
     private navParams: NavParams,
     private busService: BusServiceProvider,
+    private userService: UserServiceProvider,
     public alertCtrl: AlertController, 
     public localNotifications: LocalNotifications
   ) {this.notifyTime = moment(new Date()).format();
@@ -47,11 +51,11 @@ export class EtaPage {
                {title: 'Sunday', dayCode: 0, checked: false}
            ];}
 
-  ionViewDidLoad(){
-
+  ionViewDidLoad() {
     this.busService.getUpdate().subscribe((res) => {
       this.busRoute = this.busService.selectedRoute.name;
       this.busStop = this.busService.selectedStop.name;
+      this.busStopNumber = this.busService.selectedStop.number;
       this.bus = this.busService.selectedBus.bus;
       this.ETA = Math.floor((res.eta - Date.now()) / 1000 / 60) + ' minutes'; 
     })
@@ -141,9 +145,9 @@ cancelAll(){
       this.busService.getUpdate().subscribe((res) => {
 
         // console.log('route: ', res.route);
-        // console.log('stop:  ', res.stop);
-        // console.log('bus', res.bus);
-        // console.log('eta', res.eta);
+        // console.log('stop: ', res.stop);
+        // console.log('bus: ', res.bus);
+        // console.log('eta: ', res.eta);
         
         this.ETA = Math.floor((res.eta - Date.now()) / 1000 / 60) + ' minutes'; 
       })
@@ -151,14 +155,20 @@ cancelAll(){
   };
 
 
-  saveRoute(){
-    this.navCtrl.push(UserPage, {
-      route: this.busRoute,
-      stop: this.busStop
-    })
-  };
 
-  logIn(){
+  saveRoute(routeToSave = {
+    route_name: this.busRoute,
+    stop_number: this.busStopNumber
+  }) {
+    if (this.userService.isLoggedIn == true) {
+      // console.log(this.userService.isLoggedIn);
+      this.navCtrl.push(UserPage, routeToSave);
+    } else {
+      this.navCtrl.push(SignupPage);
+    }
+  }
+
+  logIn() {
     this.navCtrl.push(LoginPage)
   };
   

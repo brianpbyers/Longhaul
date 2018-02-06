@@ -7,6 +7,8 @@ const Op = DaBa.Sequelize.Op;
 //Calls up models
 const DB = DaBa.models;
 
+const Auth = require('./authController');
+
 //getting keys for the requests
 const rtdUser = process.env.rtdUser || require('../config/env.js').rtdUser;
 const rtdPassword = process.env.rtdPassword || require('../config/env.js').rtdPassword;
@@ -19,7 +21,6 @@ const rtdPassword = process.env.rtdPassword || require('../config/env.js').rtdPa
 let getApi = (req, res)=>{
 	res.send('You got to the Get API request!');
 };
-
 
 //sends all available routes
 let getRoutes = (req, res)=>{
@@ -42,7 +43,7 @@ let getBuses = (req, res)=>{
 let getStops = (req, res)=>{
 	let userRoute = req.params.route;
 	let userBus = req.params.bus;
-	DaBa.sequelize.query(`select * from (select distinct on (route, stop) route, stop from updates where route = '${userRoute}' and bus = '${userBus}') potato JOIN stops ON potato.stop=stops.number;`)
+	DaBa.sequelize.query(`SELECT * FROM (SELECT DISTINCT ON (route, stop) route, stop FROM updates WHERE route = '${userRoute}' AND bus = '${userBus}') potato JOIN stops ON potato.stop=stops.number;`)
 	 .then((stops)=>{
 	 	res.json(stops[0]);
 	});
@@ -97,7 +98,8 @@ let updateData = ()=>{
 	  	console.log('updating, then destroying',numUpdates,'updates');
 	  	DB.Update.bulkCreate(updates, {validate:true})
 	  	.then(()=>{
-	  		DB.Update.destroy({where:{createdAt:{[Op.lt]:(Date.now()- 10000)}}})
+	  		//deleting any records created over 10 seconds ago.  This will allow for recent updates to be retained, but old updates to be removed
+	  		DB.Update.destroy({where:{createdAt:{[Op.lt]:(Date.now()- 30000)}}})
 	  		.then(()=>{
 		  		let totalTime = (Date.now()-StartTime)/1000;
 		  		let deleteTime = (Date.now()-StartTime)/1000;
@@ -124,6 +126,44 @@ let updateData = ()=>{
 
 };
 
+let getUserRoutes = (req, res)=>{
+	let user = Auth.decodeToken(req);
+	DaBa.sequelize.query(`SELECT route_name, stop_number FROM user_routes WHERE 'userId'='${user.id}' users_saved_routes JOIN routes ON users_saved_routes.route_name=routes.name routified JOIN stops ON routified.stop_number=stops.number`)
+	.then((routes)=>{
+		res.json(routes);
+	});
+}
+
+let postUserRoutes = (req, res)=>{
+	let user = Auth.decodeToken(req);
+	let newRoute = {
+		userId: user.id,
+		route_name: req.body.route_name,
+		stop_number: req.body.stop_number
+	}
+
+	DB.UserRoute.create(newRoute)
+	.then((route)=>{
+		res.json(route);
+	});
+}
+
+let showUserRoute = (req, res)=>{
+	let routeId = Number(req.params.id);
+	DB.UserRoute.findById(routeId)
+	.then((route)=>{res.json(route)});
+}
+
+let editUserRoute = (req, res)=>{
+
+}
+
+let deleteUserRoute = (req, res)=>{
+	DB.UserRoute.destroy({where:{id:Number(req.params.id)}})
+	.then(()=>{
+		res.json("Success!");
+	})
+}
 
 module.exports.getApi = getApi;
 module.exports.getRoutes = getRoutes;
@@ -131,3 +171,8 @@ module.exports.getBuses = getBuses;
 module.exports.getStops = getStops;
 module.exports.getUpdate = getUpdate;
 module.exports.updateData = updateData;
+module.exports.getUserRoutes = getUserRoutes;
+module.exports.postUserRoutes = postUserRoutes;
+module.exports.showUserRoute = showUserRoute;
+module.exports.editUserRoute = editUserRoute;
+module.exports.deleteUserRoute = deleteUserRoute;
