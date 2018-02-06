@@ -17,7 +17,7 @@ let login = (req, res)=>{
                     return res.status(403).send({success:false, msg: "Incorrect Password."})
                 }else{
                     let token = jwt.encode(user[0], secretString);
-                    res.json({success: true, token: token, msg:"Welcome to Longhaul!"});
+                    res.json({success: true, token: token, msg:"Welcome back to Longhaul!"});
                 }
             });
         }
@@ -53,7 +53,7 @@ let signup = (req,res)=>{
 let hasGoodToken = (req, res, next)=>{
     if(req.headers.authorization && req.headers.authorization.split(' ')[0]==='Bearer'){
         let decodedToken = decodeToken(req);
-        return res.json({success: true, msg:"You have a token.  Now Change this to a next!", decodedToken});
+        return next();
     }else{
         return res.json({success: false, msg:"error: invalid token!"});
     }
