@@ -9,7 +9,7 @@ let login = (req, res)=>{
         username: req.body.name
     }})
     .then((user)=>{
-        if(!user[0].username){
+        if(!(user && user[0] && user[0].username)){
             return res.status(403).send({success:false, msg: "No such user was found."});
         }else{
             bcrypt.compare(req.body.password, user[0].password, (err, isValid)=>{
@@ -17,7 +17,7 @@ let login = (req, res)=>{
                     return res.status(403).send({success:false, msg: "Incorrect Password."})
                 }else{
                     let token = jwt.encode(user[0], secretString);
-                    res.json({success: true, token: token, msg:"Welcome back to Longhaul!"});
+                    res.json({success: true, token: token, msg:"Welcome back to Longhaul!"+jwt.decode(token, secretString).id});
                 }
             });
         }
@@ -32,7 +32,7 @@ let signup = (req,res)=>{
             username: req.body.name
         }})
         .then((user)=>{
-            if(user[0].username){
+            if(user && user[0] && user[0].username){
                 return res.json({success: false, msg:"Username already exists.  Please choose another"});
             } else{
                 let newUser = {
