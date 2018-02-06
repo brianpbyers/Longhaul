@@ -87,13 +87,13 @@ export class UserServiceProvider {
     let headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       this.http.post(`${this.baseUrl}/login`, creds, { headers: headers }).subscribe((data) => {
         if(data.json().success) {
           this.storeUserCreds(data.json().token);
           resolve(true);
         } else {
-          resolve(false);
+          reject(data.json().msg);
         }
       });
     });
@@ -124,11 +124,11 @@ export class UserServiceProvider {
     this.destroyUserCreds();
   }
 
-// Functionality for Users (when logged in) //
+// Functionality for User's Routes (when logged in) //
   
   // Index for all Routes
   getRoutes(){
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       let headers = new Headers();
       this.loadUserCreds();
       console.log('authorization token: ', this.authToken);
@@ -138,7 +138,7 @@ export class UserServiceProvider {
         if (data.json().success) {
           resolve(data.json());
         } else {
-          resolve(false);
+          reject(false);
         }
       });
     });
@@ -163,14 +163,14 @@ export class UserServiceProvider {
   }
 
   // Post new user route
-  saveNewRoute(route){
+  saveNewRoute(routeToSave){
     return new Promise(resolve => {
       let headers = new Headers();
       this.loadUserCreds();
       console.log(this.authToken);
       headers.append('Authorization', `Bearer ${this.authToken}`);
 
-      this.http.post(`${this.baseUrl}/userroutes`, { headers : headers }).subscribe((data) => {
+      this.http.post(`${this.baseUrl}/userroutes`, routeToSave, { headers : headers }).subscribe((data) => {
         if (data.json().success) {
           resolve(true);
         } else {

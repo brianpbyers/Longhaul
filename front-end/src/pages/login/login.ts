@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { UserServiceProvider } from '../../providers/user-service/user-service';
+
 import { UserPage } from '../user/user';
 
 
@@ -11,20 +13,28 @@ import { UserPage } from '../user/user';
 })
 export class LoginPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  user = {
+    name: '',
+    password: ''
   }
 
-  userPage(){
-    this.navCtrl.push(UserPage);
-  }
+  constructor(
+    private navCtrl: NavController, 
+    private navParams: NavParams,
+    private userService: UserServiceProvider
+  ) {}
 
-  signUp(){
-    alert('You have created an account, ya filthy animal')
-    this.navCtrl.push(UserPage)
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-  }
+  userLogin(user){
+      console.log(user);
+      if (user.name && user.password){
+      this.userService.userLogin(user).then((result) => {
+        this.navCtrl.push(UserPage);
+      }, (err) => {
+        alert(err);
+      })
+    } else {
+      alert('Please include both user name and password')
+    }
+  };
 
 }

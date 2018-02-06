@@ -9,6 +9,14 @@
 
 <ion-content padding>
 
-  <button ion-button (click)="selectBus()" >favRoute</button>
+  <!-- List of User Routes -->
+<div class="routesList">
+  <ul>
+    <li *ngFor="let route of userRoutes">
+      <span (click)="goToRoute()" >{{route.name}}</span>
+      <button (click)="deleteRoute(route)" >Delete Route</button>
+    </li>
+  </ul>
+</div>
 
 </ion-content>
