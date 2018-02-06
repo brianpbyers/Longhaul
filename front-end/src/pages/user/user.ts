@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { UserServiceProvider } from '../../providers/user-service/user-service';
 
+import { BusRoutesPage} from '../bus-routes/bus-routes';
 import { BusNumberPage } from '../bus-number/bus-number';
 
 @IonicPage()
@@ -27,12 +28,16 @@ export class UserPage {
     })
   };
 
+  selectNewRoute(){
+    this.navCtrl.push(BusRoutesPage);
+  }
+
   // function for selecting a favorite route (will redirect to bus/stop select)
 
-  // function for editing a route
-    // possibly use a form?
-
   //function for deleting a route
+  deleteRoute(route){
+    this.userRoutes.deleteRoute(route);
+  }
 
 
 }

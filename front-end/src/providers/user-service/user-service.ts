@@ -57,6 +57,7 @@ export class UserServiceProvider {
   // saves authentication token in local storage
   storeUserCreds(token){
     window.localStorage.setItem('userToken', token);
+    console.log('here is your token: ', token)
     this.userCreds(token);
   }
 
@@ -64,6 +65,7 @@ export class UserServiceProvider {
   userCreds(token){
     this.isLoggedIn = true;
     this.authToken = token;
+    console.log('userCreds authToken: ', this.authToken)
   }
 
   // loads user token from local storage
@@ -90,6 +92,7 @@ export class UserServiceProvider {
     return new Promise((resolve, reject) => {
       this.http.post(`${this.baseUrl}/login`, creds, { headers: headers }).subscribe((data) => {
         if(data.json().success) {
+          console.log('authentication token: ', data.json().token)
           this.storeUserCreds(data.json().token);
           resolve(true);
         } else {
