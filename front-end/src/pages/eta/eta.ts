@@ -41,7 +41,7 @@ export class EtaPage {
 
 
     this.updateEta();
-  }
+  ;}
 
   updateEta() {
     setInterval(() => {
@@ -73,6 +73,6 @@ export class EtaPage {
 
   logIn() {
     this.navCtrl.push(LoginPage)
-  }
+  };
   
 }

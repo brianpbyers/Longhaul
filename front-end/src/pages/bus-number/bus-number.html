@@ -13,16 +13,19 @@
             <img src="../../assets/imgs/buswindow4.jpg"/>
             <div class="card-title">Your Bus Route: {{selectedRoute}}</div>
             <div class="card-subtitle">{{routeDescription}}</div>
-          </ion-card>
+          </ion-card>  
         </div>
-
-   
+    <div>
+      <h2> Choose your bus number</h2>
+    </div>    
+       
   <div class="scroller">
+     
     <ion-list [virtualScroll]="buses" [approxItemHeight]="'40px'">
       <ion-item *virtualItem="let bus">
         <div item-left [style.background-color]="bus.color" style="width: 60px; height:60px; border-radius:50%"></div>
-
-        <h4>{{bus.bus}} </h4>
+        
+        <h3>{{bus.bus}} </h3>
 
         <ion-icon name="arrow-dropright" align="right" (click)="goToStopsPage(bus)"></ion-icon>
 
