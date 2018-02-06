@@ -115,6 +115,7 @@ addNotifications(){
 
   }
 
+
   console.log("Notifications to be scheduled: ", this.notifications);
 
   if(this.platform.is('cordova')){
