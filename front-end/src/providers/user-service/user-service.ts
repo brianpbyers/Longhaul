@@ -1,6 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, isDevMode } from '@angular/core';
 import { Http, Headers } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
+// import { catchError, retry } from 'rxjs/operators';
 
 
 @Injectable()
@@ -10,16 +13,18 @@ export class UserServiceProvider {
   //   return [Http];
   // }
 
-  isLoggedIn: boolean;
+  isLoggedIn: boolean = false;
   authToken: any;
   baseUrl: string;
+  returnMessage: any;
 
   constructor(
     private httpClient: HttpClient,
     private http: Http
   ) {
-    this.isLoggedIn = false,
-    this.authToken = null;
+    // this.isLoggedIn = false,
+    // this.authToken = null;
+
     // sets url's for dev/prod modes
     if (isDevMode()) {
       this.baseUrl = 'http://localhost:3000/api';
@@ -28,16 +33,35 @@ export class UserServiceProvider {
     }
   }
 
+// ERROR HANDLING
+  // not used yet, need to pipe errors into this function for each Http request
+  
+  private handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error.message);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong,
+      console.error(
+        `Backend returned code ${error.status}, ` +
+        `body was: ${error.error}`);
+    }
+    // return an ErrorObservable with a user-facing error message
+    return new ErrorObservable(
+      'Something bad happened; please try again later.');
+  };
+
 // TOKEN HANDLING
 
   // saves authentication token in local storage
   storeUserCreds(token){
     window.localStorage.setItem('userToken', token);
-    this.useCreds(token);
+    this.userCreds(token);
   }
 
   // sets credentials to local variables
-  useCreds(token){
+  userCreds(token){
     this.isLoggedIn = true;
     this.authToken = token;
   }
@@ -45,7 +69,7 @@ export class UserServiceProvider {
   // loads user token from local storage
   loadUserCreds(){
     let token = window.localStorage.getItem('userToken');
-    this.useCreds(token);
+    this.userCreds(token);
   }
 
   // gets rid of user credentials upon logout
@@ -54,6 +78,8 @@ export class UserServiceProvider {
     this.authToken = null;
     window.localStorage.clear();
   }
+
+// USER FUNCTIONALITY
 
   // User Login functionality
   userLogin(user){
@@ -74,20 +100,28 @@ export class UserServiceProvider {
   }
 
   // Create new User functionality
-  signUp(user){
-    var creds = `name=${user.name}&password=${user.password}`;
+  signUp(newUser){
+    var creds = `name=${newUser.name}&password=${newUser.password}`;
     let headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       this.http.post(`${this.baseUrl}/signup`, creds, { headers : headers }).subscribe((data) => {
+        this.returnMessage = data.json().msg;
         if (data.json().success) {
-          resolve(true);
+          this.storeUserCreds(data.json().token)
+          resolve(this.returnMessage);
         } else {
-          resolve(false);
+          console.log('error: ', this.returnMessage)
+          reject(this.returnMessage);
         }
       });
     });
+  }
+
+  // Log out functionality
+  logout() {
+    this.destroyUserCreds();
   }
 
 // Functionality for Users (when logged in) //
@@ -178,8 +212,8 @@ export class UserServiceProvider {
         } else {
           resolve(false);
         }
-      })
-    })
+      });
+    });
   }
 
 }

@@ -39,25 +39,8 @@ DaBa.sequelize.sync({force: true}).then(function(){
 					console.log("CREATED STOPS!");
 
 				console.log('Ended');
+				process.exit();
 
-
-				csv()
-				.fromFile('./StaticTripData/trips.txt')
-				.on('json', (jsonObj)=>{
-					if(jsonObj.route_id) tripsArray.push({route:jsonObj.route_id,service:jsonObj.service_id,trip:jsonObj.trip_id});
-					else invalidTrips.push(jsonObj);
-				})
-				.on('done', (err)=>{
-					console.log('done converting Trips CSV');
-					console.log('Invalid Trips:', ...invalidTrips);
-					DB.Trip.bulkCreate(tripsArray, {validate: true})
-					.then((createdTrips)=>{
-						console.log("Created Trips!");
-						process.exit();
-					});
-
-					console.log('Finished!');
-					});
 				});
 			});
 		});
