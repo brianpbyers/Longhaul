@@ -30,7 +30,13 @@ export class EtaPage {
     private userService: UserServiceProvider
   ) {}
 
+  ionViewWillEnter(){
+    // verifying if user is logged in or not
+    this.isLoggedIn = this.userService.isLoggedIn;
+  }
+
   ionViewDidLoad() {
+    // calls update function to get eta for current route/bus/stop
     this.busService.getUpdate().subscribe((res) => {
       this.busRoute = this.busService.selectedRoute.name;
       this.busStop = this.busService.selectedStop.name;
@@ -39,7 +45,7 @@ export class EtaPage {
       this.ETA = Math.floor((res.eta - Date.now()) / 1000 / 60) + ' minutes'; 
     })
 
-
+    // calls function to periodically update eta time
     this.updateEta();
   ;}
 
@@ -64,7 +70,7 @@ export class EtaPage {
   }) {
     if (this.userService.isLoggedIn == true) {
       // console.log(this.userService.isLoggedIn);
-      this.isLoggedIn = this.userService.isLoggedIn;
+      
       this.navCtrl.push(UserPage, routeToSave);
     } else {
       this.navCtrl.push(SignupPage);

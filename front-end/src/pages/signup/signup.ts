@@ -13,7 +13,7 @@ import { UserPage } from '../user/user';
 })
 export class SignupPage {
 
-  newUser = {
+  user = {
     name: '',
     password: ''
   }
@@ -24,11 +24,12 @@ export class SignupPage {
     private userService: UserServiceProvider
   ) {}
 
- createAccount(newUser){
-   console.log('created account');
+ createAccount(user){
+   
   // console.log(`new user ${this.newUser.user_name} created`)
   // console.log(`new user password: ${this.newUser.user_password}`)
-  this.userService.signUp(newUser).then((result) => {
+
+  this.userService.signUp(user).then((result) => {
     if (this.userService.isLoggedIn) {
       alert(result);
       this.navCtrl.push(UserPage)
