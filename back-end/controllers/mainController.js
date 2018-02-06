@@ -30,6 +30,7 @@ let getRoutes = (req, res)=>{
 		});
 };
 
+//returns all buses on a route
 let getBuses = (req, res)=>{
 	let userRoute = req.params.route;
 	DB.Bus.findAll({where:{route:userRoute}})
@@ -98,7 +99,7 @@ let updateData = ()=>{
 	  	console.log('updating, then destroying',numUpdates,'updates');
 	  	DB.Update.bulkCreate(updates, {validate:true})
 	  	.then(()=>{
-	  		//deleting any records created over 10 seconds ago.  This will allow for recent updates to be retained, but old updates to be removed
+	  		//deleting any records created over 30 seconds ago.  This will allow for recent updates to be retained, but old updates to be removed
 	  		DB.Update.destroy({where:{createdAt:{[Op.lt]:(Date.now()- 30000)}}})
 	  		.then(()=>{
 		  		let totalTime = (Date.now()-StartTime)/1000;
@@ -126,6 +127,7 @@ let updateData = ()=>{
 
 };
 
+//returns all saved routes associated with the user
 let getUserRoutes = (req, res)=>{
 	let user = Auth.decodeToken(req);
 	DaBa.sequelize.query(`SELECT route_name, stop_number FROM user_routes WHERE 'userId'='${user.id}' users_saved_routes JOIN routes ON users_saved_routes.route_name=routes.name routified JOIN stops ON routified.stop_number=stops.number`)
@@ -134,6 +136,7 @@ let getUserRoutes = (req, res)=>{
 	});
 }
 
+//creates user routes
 let postUserRoutes = (req, res)=>{
 	let user = Auth.decodeToken(req);
 	let newRoute = {
@@ -148,6 +151,7 @@ let postUserRoutes = (req, res)=>{
 	});
 }
 
+//returns a specific route
 let showUserRoute = (req, res)=>{
 	let routeId = Number(req.params.id);
 	DB.UserRoute.findById(routeId)
@@ -158,6 +162,8 @@ let editUserRoute = (req, res)=>{
 
 }
 
+
+//destroys a specific route
 let deleteUserRoute = (req, res)=>{
 	DB.UserRoute.destroy({where:{id:Number(req.params.id)}})
 	.then(()=>{
