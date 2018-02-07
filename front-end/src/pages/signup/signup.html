@@ -2,20 +2,29 @@
 <ion-header>
 
   <ion-navbar color="dark">
-    <ion-title>Sign up for An Account</ion-title>
+    <ion-title>User Sign Up</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding class="signup">
-  <form (submit)="createAccount(newUser)" >
+
+  <form>
+
     
     <ion-input type="text" name="userName" [(ngModel)]="newUser.name" placeholder="user name" ></ion-input>
 
+    <br>
+
     <ion-input type="password" name="userPassword" [(ngModel)]="newUser.password" placeholder="password" ></ion-input>
 
-    <button ion-button small type="submit">Create Account</button>
+
+
+    <hr>
+
+    <button ion-button small (click)="createAccount(newUser)" >Log In</button>
+
 
   </form>
 

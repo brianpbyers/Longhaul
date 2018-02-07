@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar color="dark">
-    <ion-title>loginPage</ion-title>
+    <ion-title>User Log In</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -9,13 +9,17 @@
 
 <ion-content padding>
 
-  <form (submit)="userLogin(user)">
+  <form>
 
-    <input type="text" name="userName" [(ngModel)]="user.name" placeholder="user name" >
+    <ion-input type="text" name="userName" [(ngModel)]="user.name" placeholder="user name" ></ion-input>
 
-    <input type="password" name="password" [(ngModel)]="user.password" placeholder="password" >
+    <br>
 
-    <input type="submit">
+    <ion-input type="password" name="password" [(ngModel)]="user.password" placeholder="password" ></ion-input>
+
+    <hr>
+
+    <button ion-button small (click)="userLogin(user)" >Log In</button>
 
   </form>
 
