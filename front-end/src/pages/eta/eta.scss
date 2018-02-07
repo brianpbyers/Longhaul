@@ -27,12 +27,14 @@ page-eta {
     }
     
 }
-.buttons{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
+
 ion-icon{
     font-size: 36px;
+}
+.button{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+   
 }
