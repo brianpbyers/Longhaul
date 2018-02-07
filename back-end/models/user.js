@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-//user model.  using bcrypts sync versions because async caused issues even with beforeCreate.
+//user model.  using bcrypts sync versions because async caused issues even with beforeCreate.  Has many user routes
 module.exports = function(sequelize, Sequelize){
   var model = sequelize.define('user', {
     username: Sequelize.STRING,
