@@ -1,5 +1,6 @@
 ### User Research Interviews
 
+
 We interviewed 10-15 people who were regular users of RTD or similar systems in other cities. Our intention was to determine if the problem this app intends to solve is real, and if people would actually use it. 
 
 Here is our basic set of questions that we used to guide the research:
@@ -14,7 +15,7 @@ Here is our basic set of questions that we used to guide the research:
 9. Do you use any transit apps? Which ones?
 10. How do you keep track of your stop? E.g. how do you know when it’s time to pack up your stuff and get ready to exit.
 
-###Subject 1: Female, 34, Denver area. 
+### Subject 1: Female, 34, Denver area. 
 1. Do you use public transit?
   Yes
   
@@ -45,7 +46,7 @@ Here is our basic set of questions that we used to guide the research:
 10.  How do you keep track of your stop? E.g. how do you know when it’s time to pack up your stuff and get ready to exit.
   If I'm taking a route I take frequently, I listen to my internal sense of about how much time it should take, then I look out the window for visual cues, realize I still haven't memorized the landscape, and stare at the bus display until the next stop is announced. This usually happens 2-3 times before I see the stop before mine announced. Then I get ready to go for my stop.  > If I'm taking a route I'm not familiar with and am uncertain, I'll usually turn on my GPS and watch my location along the route indicated by Google Maps. Before I had this option, I would stress and watch the stop announcements and out the window with concern, obliterating most of the reasons I usually choose transit in the first place. Smart phones & Google Maps have made transit fun again.
   
-###Subject 2: Male, 32, Lakewood
+### Subject 2: Male, 32, Lakewood
 1. Do you use public transit?
   Yes.
   
@@ -76,7 +77,7 @@ Here is our basic set of questions that we used to guide the research:
 10. How do you keep track of your stop? E.g. how do you know when it’s time to pack up your stuff and get ready to exit.
   In other cities, we roughly gauge when to move/pack up stuff for a stop based on the maps on the bus or light rail. Locally, it’s just learning from multiple rides.
   
-###Subject 3: Female 42 New York City
+### Subject 3: Female 42 New York City
 1. Do you use public transit?
    Yes, MTA nyc subway
    
