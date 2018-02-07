@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormsModule } from '@angular/forms';
 
 import { UserServiceProvider } from '../../providers/user-service/user-service';
+import { BusServiceProvider } from '../../providers/bus-service/bus-service';
 
 import { UserPage } from '../user/user';
 
@@ -18,24 +19,38 @@ export class SignupPage {
     password: ''
   }
 
+  routeToSave: any;
+  selectedStop = this.busService.selectedStop;
+
   constructor(
     private navCtrl: NavController, 
     private navParams: NavParams,
-    private userService: UserServiceProvider
+    private userService: UserServiceProvider,
+    private busService: BusServiceProvider
   ) {}
 
- createAccount(newUser){
-   
-  console.log(`new user ${this.newUser.name} created`)
-  console.log(`new user password: ${this.newUser.password}`)
-
-  this.userService.signUp(newUser).then((result) => {
-    if (this.userService.isLoggedIn) {
-      alert(result);
-      this.navCtrl.push(UserPage)
+  ionViewDidLoad(){
+    if (this.selectedStop){
+      this.routeToSave = {
+        route_name: this.busService.selectedRoute.name,
+        stop_number: this.busService.selectedStop.number
+      }
     }
-  }, (err) => {
-    alert(err);
-  });
- }
-}
+  }
+
+ createAccount(newUser){
+      if (newUser.name && newUser.password){
+        this.userService.signUp(newUser).then((result) => {
+            if (this.routeToSave) {
+              console.log('saving route')
+              this.userService.saveNewRoute(this.routeToSave)
+            };
+            this.navCtrl.push(UserPage)
+        }, (err) => {
+          alert(err);
+        })
+      } else {
+        alert('Please include both user name and password')
+    }
+  }
+};

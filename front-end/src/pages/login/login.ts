@@ -18,10 +18,9 @@ export class LoginPage {
     name: '',
     password: ''
   }
-  routeToSave = {
-    route_name: this.busService.selectedRoute.name,
-    stop_number: this.busService.selectedStop.number
-  };
+
+  routeToSave: any;
+  selectedStop = this.busService.selectedStop;
 
   constructor(
     private navCtrl: NavController, 
@@ -30,12 +29,16 @@ export class LoginPage {
     private busService: BusServiceProvider
   ) {}
 
-
+  ionViewDidLoad(){
+  if(this.selectedStop) {
+    this.routeToSave = {
+      route_name: this.busService.selectedRoute.name,
+      stop_number: this.busService.selectedStop.number
+      }
+    }
+  }
 
   userLogin(user){
-      console.log(user);
-     
-
       if (user.name && user.password){
       this.userService.userLogin(user).then((result) => {
         // saves the new route once the user has been logged in
@@ -49,8 +52,6 @@ export class LoginPage {
       })
     } else {
       alert('Please include both user name and password')
+      }
     }
-  
-  };
-
-}
+  }
