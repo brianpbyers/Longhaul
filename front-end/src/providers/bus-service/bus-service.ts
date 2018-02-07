@@ -1,28 +1,35 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, isDevMode } from '@angular/core';
-
+import { Platform } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class BusServiceProvider {
 
 // sets up variables to pass data along user flow
-  selectedRoute: any;
-  selectedStop: any;
-  selectedBus: any;
+selectedRoute: any;
+selectedStop: any;
+selectedBus: any;
 
-  constructor(
-    private http: HttpClient
+constructor(
+  private http: HttpClient,
+  public platform: Platform
   ) {
+    //Check for android platform first
+    if (this.platform.is('android')) {
+      this.baseUrl = 'https://longhaul1.herokuapp.com';
+    }else{
     // sets url's for dev/prod modes
-    if (isDevMode()) {
+    if(isDevMode()) {
       this.baseUrl = 'http://localhost:3000';
-    } else {
+    }else {
       this.baseUrl = '';
     }
   }
+}
 
   baseUrl: string;
+  /////testing thnings
 
   // gets all of the routes
   getRoutes(){

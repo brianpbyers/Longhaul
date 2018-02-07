@@ -9,8 +9,14 @@
 
 <ion-content padding>
 
-  <button ion-button (click)="userPage()" >Log In</button>
+  <form (submit)="userLogin(user)">
 
-  <button ion-button (click)="signUp()" >Sign Up</button>
+    <input type="text" name="userName" [(ngModel)]="user.name" placeholder="user name" >
+
+    <input type="password" name="password" [(ngModel)]="user.password" placeholder="password" >
+
+    <input type="submit">
+
+  </form>
 
 </ion-content>
