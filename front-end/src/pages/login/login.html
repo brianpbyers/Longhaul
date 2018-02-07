@@ -9,14 +9,13 @@
 
 <ion-content padding>
 
-  <form (submit)="userLogin(user)">
+  <form>
 
     <input type="text" name="userName" [(ngModel)]="user.name" placeholder="user name" >
 
     <input type="password" name="password" [(ngModel)]="user.password" placeholder="password" >
 
-    <input type="submit">
-
+    <button ion-button (click) = "userLogin(user)" type="submit">Log In</button>
   </form>
 
 </ion-content>
