@@ -13,8 +13,9 @@
 <div class="routesList">
   <ul>
     <li *ngFor="let route of userRoutes">
-      <span (click)="goToRoute(route)" >{{route.name}}</span>
+      <span (click)="goToRoute(route)" >{{route.route_name}} - {{route.name}}</span>
       <button (click)="deleteRoute(route)" >Delete Route</button>
+      <hr>
     </li>
   </ul>
 </div>
