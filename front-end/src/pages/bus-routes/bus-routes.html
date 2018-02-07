@@ -15,13 +15,13 @@
           </ion-card>
     </div>
  <div class="scroller">
-    <ion-list [virtualScroll]="routes" [approxItemHeight]="'40px'" >
+    <ion-list [virtualScroll]="routes" [approxItemHeight]="'60px'" >
           <ion-item *virtualItem="let route">
-            <div item-left [style.background-color]="route.color" style="width: 60px; height:60px; border-radius:50%"></div>
-              
-             <h4>{{route.name}}  {{route.description}}</h4>
+            <div item-left  style="width: 60px; height:60px;"></div>
+               
+             <span style="font-size : 1.3em !important"><strong>{{route.name}} </strong> {{route.description}}</span>
 
-             <ion-icon name="arrow-dropright" font-size="24px" align="right" (click)="goToBusPage(route)"></ion-icon>
+             <ion-icon class="custom-icon" name="arrow-dropright" style="zoom:1.2;" align="right" (click)="goToBusPage(route)"></ion-icon>
 
           </ion-item>
         </ion-list>
