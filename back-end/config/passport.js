@@ -1,3 +1,4 @@
+//passport jwt utilizes json web tokens to determine if a valid user is attempting to access the server.
 const jsonStrat = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 

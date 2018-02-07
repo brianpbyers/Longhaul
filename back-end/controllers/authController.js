@@ -4,6 +4,7 @@ let User = DB.models.User;
 let bcrypt = require('bcrypt');
 let secretString = "SecretJWTString"
 
+//login function.  upon success returns a jwt to the user for future server interactions
 let login = (req, res)=>{
     User.findAll({where:{
         username: req.body.name
@@ -24,6 +25,7 @@ let login = (req, res)=>{
     });
 }
 
+//signup function.  upon success returns a jwt for future server interactions
 let signup = (req,res)=>{
     if(!req.body.name||!req.body.password){
         res.json({success: false, msg:"Please enter both a username AND a password"});
@@ -49,6 +51,7 @@ let signup = (req,res)=>{
     }
 }
 
+//isAuthenticated function.  Success allows user to access their requested information.  Failure does not.
 let hasGoodToken = (req, res, next)=>{
     if(req.headers.authorization && req.headers.authorization.split(' ')[0]==='Bearer'){
         let decodedToken = decodeToken(req);
@@ -59,6 +62,7 @@ let hasGoodToken = (req, res, next)=>{
 
 }
 
+//returns user information stored in the req's token
 let decodeToken = (req)=>{
     //.name, .password etc will be returned.
     return jwt.decode(req.headers.authorization.split(' ')[1], secretString);

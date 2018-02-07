@@ -25,9 +25,10 @@ export class SignupPage {
   ) {}
 
  createAccount(newUser){
-   console.log('created account');
-  // console.log(`new user ${this.newUser.user_name} created`)
-  // console.log(`new user password: ${this.newUser.user_password}`)
+   
+  console.log(`new user ${this.newUser.name} created`)
+  console.log(`new user password: ${this.newUser.password}`)
+
   this.userService.signUp(newUser).then((result) => {
     if (this.userService.isLoggedIn) {
       alert(result);

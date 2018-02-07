@@ -1,12 +1,5 @@
 const bcrypt = require('bcrypt');
-
-let hashPw=(pass)=>{
-  bcrypt.genSalt((err, salt)=>{
-
-  })
-}
-
-
+//user model.  using bcrypts sync versions because async caused issues even with beforeCreate.
 module.exports = function(sequelize, Sequelize){
   var model = sequelize.define('user', {
     username: Sequelize.STRING,

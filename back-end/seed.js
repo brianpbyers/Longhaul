@@ -1,7 +1,8 @@
 const csv = require('csvtojson');
 
-
+//database
 let DaBa = require("./models");
+//models
 let DB = DaBa.models;
 DaBa.sequelize.sync({force: true}).then(function(){
 	let routesArray = [];
@@ -10,7 +11,7 @@ DaBa.sequelize.sync({force: true}).then(function(){
 	let invalidRoutes = ["Start"];
 	let invalidStops = ["Start"];
 	let invalidTrips = ["Start"];
-
+//converts txt data to json objects so we can store the data in SQL
 	csv()
 	.fromFile('./StaticTripData/routes.txt')
 	.on('json',(jsonObj)=>{

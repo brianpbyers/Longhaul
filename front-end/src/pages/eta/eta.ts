@@ -19,9 +19,12 @@ export class EtaPage {
 
   busRoute: any;
   busStop: any;
-  busStopNumber: any;
   bus: any;
+  busStopNumber: any;
   ETA: any;
+  isLoggedIn: boolean = false;
+
+  
   notifyTime: any;
   notifications: any[] = [];
   days: any[];
@@ -51,7 +54,15 @@ export class EtaPage {
                {title: 'Sunday', dayCode: 0, checked: false}
            ];}
 
+
+  ionViewWillEnter(){
+    // verifying if user is logged in or not
+    this.isLoggedIn = this.userService.isLoggedIn;
+  }
+
+
   ionViewDidLoad() {
+    // calls update function to get eta for current route/bus/stop
     this.busService.getUpdate().subscribe((res) => {
       this.busRoute = this.busService.selectedRoute.name;
       this.busStop = this.busService.selectedStop.name;
@@ -60,10 +71,12 @@ export class EtaPage {
       this.ETA = Math.floor((res.eta - Date.now()) / 1000 / 60) + ' minutes'; 
     })
 
-
+    // calls function to periodically update eta time
     this.updateEta();
   ;}
 
+
+ 
 timeChange(time){
   this.chosenHours = time.hour.value;
   this.chosenMinutes = time.minute.value;
@@ -102,6 +115,7 @@ addNotifications(){
       }
 
   }
+
 
   console.log("Notifications to be scheduled: ", this.notifications);
 
@@ -155,21 +169,27 @@ cancelAll(){
   };
 
 
-
   saveRoute(routeToSave = {
     route_name: this.busRoute,
     stop_number: this.busStopNumber
   }) {
-    if (this.userService.isLoggedIn == true) {
-      // console.log(this.userService.isLoggedIn);
-      this.navCtrl.push(UserPage, routeToSave);
-    } else {
-      this.navCtrl.push(SignupPage);
-    }
-  }
+      if (this.userService.isLoggedIn == true) {
+        // console.log(this.userService.isLoggedIn);
+        this.userService.saveNewRoute(routeToSave);
+        this.navCtrl.push(UserPage);
+      } else {
+        this.navCtrl.push(LoginPage); 
+      };
+    };
+
 
   logIn() {
-    this.navCtrl.push(LoginPage)
+    this.navCtrl.push(LoginPage);
   };
-  
-}
+
+  signUp(){
+    this.navCtrl.push(SignupPage);
+  }
+
+
+};
