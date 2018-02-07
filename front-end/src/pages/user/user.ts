@@ -37,6 +37,7 @@ export class UserPage {
       console.log('getRoutes results: ', result);
       this.userRoutes = result;
     })
+
   };
 
   selectNewRoute(){
