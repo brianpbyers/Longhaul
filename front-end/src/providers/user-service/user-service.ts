@@ -17,6 +17,7 @@ export class UserServiceProvider {
   authToken: any;
   baseUrl: string;
   returnMessage: any;
+  goToUserRoute: boolean = false;
 
   constructor(
     private httpClient: HttpClient,
@@ -92,7 +93,7 @@ export class UserServiceProvider {
     return new Promise((resolve, reject) => {
       this.http.post(`${this.baseUrl}/login`, creds, { headers: headers }).subscribe((data) => {
         if(data.json().success) {
-          console.log('authentication token: ', data.json().token)
+          // console.log('authentication token: ', data.json().token)
           this.storeUserCreds(data.json().token);
           resolve(true);
         } else {
@@ -113,7 +114,7 @@ export class UserServiceProvider {
         this.returnMessage = data.json().msg;
         if (data.json().success) {
           this.storeUserCreds(data.json().token)
-          resolve(this.returnMessage);
+          resolve(true);
         } else {
           console.log('error: ', this.returnMessage)
           reject(this.returnMessage);
