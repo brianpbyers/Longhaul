@@ -20,7 +20,7 @@ export class LoginPage {
   }
   routeToSave = {
     route_name: this.busService.selectedRoute.name,
-    stop_number: this.busService.selectedStop.name
+    stop_number: this.busService.selectedStop.number
   };
 
   constructor(

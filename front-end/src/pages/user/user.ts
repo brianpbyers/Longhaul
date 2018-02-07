@@ -29,6 +29,7 @@ export class UserPage {
   };
 
   selectNewRoute(){
+    console.log('selected new route');
     this.navCtrl.push(BusRoutesPage);
   }
 
@@ -36,7 +37,10 @@ export class UserPage {
 
   //function for deleting a route
   deleteRoute(route){
-    this.userRoutes.deleteRoute(route);
+    console.log('delete this route', route)
+    this.userService.deleteUserRoute(route);
+
+    this.userRoutes.splice(this.userRoutes.indexOf(route), 1);
   }
 
 

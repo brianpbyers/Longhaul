@@ -19,8 +19,10 @@
           <div class="card-title">Your Bus Stop: {{busStop}} </div>
     </ion-card>
     <ion-card>
+
             <img src="../../assets/imgs/rainy-traffic.jpg"/>
             <div class="card-title">Your Bus Number: {{busRoute}} </div>
+
     </ion-card>
     <ion-card>
               <img src="../../assets/imgs/inside-bus-2.jpg"/>
@@ -56,10 +58,10 @@
   </div>
 
 
-  <div >
+  <div *ngIf="isLoggedIn" >
     <button ion-button (click)="saveRoute()" >Save Your Route</button>
   </div>
-  <div > 
+  <div *ngIf="!isLoggedIn" > 
     <button ion-button (click)="logIn()" >Log In/Save Route</button>
     <p>New user? <span (click)="signUp()" style="text-decoration:underline">Click here to sign up!</span></p>
   </div>
