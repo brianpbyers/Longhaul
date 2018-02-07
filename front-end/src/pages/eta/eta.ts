@@ -137,9 +137,7 @@ addNotifications(){
           alert.present();
 
       });
-
   }
- 
 }
 
         
