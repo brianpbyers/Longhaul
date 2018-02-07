@@ -62,7 +62,7 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     UserPage,
     TabsPage,
     FavoritesPage,
-    AboutPage,
+    AboutPage
   ],
   providers: [
     StatusBar,

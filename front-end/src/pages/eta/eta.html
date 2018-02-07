@@ -10,22 +10,22 @@
 <ion-content padding>
   <div class="routes-card">
     <ion-card>
-        <img src="../../assets/imgs/metro-train.jpg"/>
+        <img src="../../assets/imgs/metrotrain.jpg"/>
         <div class="card-title">Your Bus Route: </div>
         <div class="card-subtitle">{{busRoute}}</div>
     </ion-card>
     <ion-card>
-          <img src="../../assets/imgs/inside.jpg"/>
+          <img src="../../assets/imgs/inside1.jpg"/>
           <div class="card-title">Your Bus Stop: {{busStop}} </div>
     </ion-card>
     <ion-card>
 
-            <img src="../../assets/imgs/rainy-traffic.jpg"/>
+            <img src="../../assets/imgs/rainytraffic1.jpg"/>
             <div class="card-title">Your Bus Number: {{busRoute}} </div>
 
     </ion-card>
     <ion-card>
-              <img src="../../assets/imgs/inside-bus-2.jpg"/>
+              <img src="../../assets/imgs/insidebus2.jpg"/>
               <div class="card-title">Your ETA: {{ETA}} </div>
     </ion-card>
   </div>
@@ -37,7 +37,7 @@
       <ion-list no-lines>
           
                  <ion-item>
-                   <ion-label>Notify me at: </ion-label>
+                   <ion-label><h2>Notify me at: </h2></ion-label>
                    <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="notifyTime" (ionChange)="timeChange($event)"></ion-datetime>
                  </ion-item>
           
@@ -52,12 +52,17 @@
           
              </ion-list>
   </div>
-  <div>
-      <button (click)="addNotifications()" ion-button color="primary" full>Schedule</button>
-      <button (click)="cancelAll()" ion-button color="danger" full>Cancel all alarms</button>
-  </div>
 
-
+  <!-- **** Stretch Goal for this page -->
+  <!-- if the user is logged in already, display "save this route" -->
+  <!-- if the user is not logged in, display "Login/Signup option" -->
+<!-- <div class="button"> -->
+    <button (click)="addNotifications()" ion-button color="secondary" block>Schedule</button>
+    <button (click)="cancelAll()" ion-button color="danger" block>Cancel all alarms</button>
+  <!-- <button ion-button color="secondary" (click)="saveRoute()" block>Save Your Route</button> -->
+<!-- </div> -->
+  <!-- <button ion-button (click)="logIn()" >Login to save this route</button> -->
+  
   <div *ngIf="isLoggedIn" >
     <button ion-button (click)="saveRoute()" >Save Your Route</button>
   </div>

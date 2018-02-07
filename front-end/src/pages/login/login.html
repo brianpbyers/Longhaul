@@ -11,11 +11,16 @@
 
   <form>
 
-    <input type="text" name="userName" [(ngModel)]="user.name" placeholder="user name" >
+    <ion-input type="text" name="userName" [(ngModel)]="user.name" placeholder="user name" ></ion-input>
 
-    <input type="password" name="password" [(ngModel)]="user.password" placeholder="password" >
+    <br>
 
-    <button ion-button (click) = "userLogin(user)" type="submit">Log In</button>
+    <ion-input type="password" name="password" [(ngModel)]="user.password" placeholder="password" ></ion-input>
+
+    <hr>
+
+    <button ion-button small (click)="userLogin(user)" >Log In</button>
+
   </form>
 
 </ion-content>
