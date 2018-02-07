@@ -167,7 +167,7 @@ export class UserServiceProvider {
 
   // Post new user route
   saveNewRoute(routeToSave){
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       let headers = new Headers();
       this.loadUserCreds();
       console.log(this.authToken);
@@ -175,9 +175,11 @@ export class UserServiceProvider {
 
       this.http.post(`${this.baseUrl}/userroutes`, routeToSave, { headers : headers }).subscribe((data) => {
         if (data.json()) {
+          console.log(true);
           resolve(true);
         } else {
-          resolve(false);
+          console.log(false);
+          reject(false);
         }
       });
     });

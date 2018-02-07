@@ -178,9 +178,7 @@ cancelAll(){
         this.userService.saveNewRoute(routeToSave);
         this.navCtrl.push(UserPage);
       } else {
-        
-        this.navCtrl.push(LoginPage);
-        
+        this.navCtrl.push(LoginPage); 
       };
     };
 
