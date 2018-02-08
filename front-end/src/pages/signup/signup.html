@@ -9,7 +9,9 @@
 
 
 <ion-content padding class="signup">
-  <form (click)="createAccount(newUser)" >
+
+  <form>
+
     
     <ion-input type="text" name="userName" [(ngModel)]="newUser.name" placeholder="user name" ></ion-input>
 
@@ -17,9 +19,12 @@
 
     <ion-input type="password" name="userPassword" [(ngModel)]="newUser.password" placeholder="password" ></ion-input>
 
+
+
     <hr>
 
     <button ion-button small (click)="createAccount(newUser)" >Log In</button>
+
 
   </form>
 
