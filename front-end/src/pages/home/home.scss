@@ -1,0 +1,45 @@
+page-home {
+   
+    ion-content{
+        background-image: url("../assets/imgs/inside1.jpg");
+        background-color: rgba(0, 0, 0, 0);
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: cover;
+        // color: color($colors, light) !important
+
+    }
+}
+
+.main{
+    color: color($colors, light);
+    font-size: 44px;
+    text-align: center;
+
+}
+.maintext{
+    color: color($colors, light);
+    padding-top: 15vh;
+    font-size: 34px;
+    text-align: center;
+    font-weight: bold;
+   
+}
+
+.button{
+    font-size: 24px;
+    height: 70px;
+    text-align: center;
+    
+    padding-left: 30px;
+    padding-right: 30px;
+    text-align: center;
+    
+}
+.buttonholder{
+    padding-top: 10vh;
+    justify-content: center;
+    text-align: center;
+
+}
+

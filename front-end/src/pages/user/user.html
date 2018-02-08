@@ -1,0 +1,25 @@
+<ion-header>
+
+  <ion-navbar color="dark">
+    <ion-title>User Page</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <!-- List of User Routes -->
+<div class="routesList">
+  <ul>
+    <li *ngFor="let route of userRoutes">
+      <span (click)="goToRoute(route)" >{{route.route_name}} - {{route.name}}</span>
+      <button (click)="deleteRoute(route)" >Delete Route</button>
+      <hr>
+    </li>
+  </ul>
+</div>
+
+<button ion-button (click)="selectNewRoute()" >Select new route</button>
+
+</ion-content>
